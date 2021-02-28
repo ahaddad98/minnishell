@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 12:54:32 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/28 17:18:17 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void		ctrl_d(t_read *rd, t_path *path)
 	if (rd->line[0] == '\0' && !path->dos)
 	{
 		ft_putendl_fd("exit", 1);
+		// ft_free_2dem_arr((void ***)&(path->env->fullenv));
 		exit(0);
 	}
 	if (rd->line[path->ret - 1] != '\n')
@@ -165,6 +166,7 @@ int			main(int argc, char **argv, char **env)
 		if (g_var_glob1 == 2)
 			ft_putstr_fd("Quit: 3\n", 1);
 	}
-	free(path.env->fullenv);
-	free(rd.line);
+	ft_free_arr((void **)&rd.line);
+	// free(rd.line);
+		// free(rd.line);
 }

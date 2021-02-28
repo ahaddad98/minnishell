@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 12:48:28 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/28 17:18:04 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,8 @@ int lstsize_1(t_list_cmd *lst);
 void pipes_cmds(t_path *path, t_list_cmd *lst, int s);
 void ft_execute1(t_all *all, t_path *path, t_shell *sh);
 void    free_1d(char *p);
+void    ft_free_2dem_arr(void ***arr);
+void    ft_free_arr(void **array);
 /*
 **
 *************parsing*****************
@@ -342,7 +344,7 @@ char *no_antislach(char *str);
 char *slach(char *s);
 int check_n(char *str);
 int ft_strlen_to_char(char *str);
-void free_all(t_list_cmd *lst, t_shell *sh);
+void free_all(t_list_cmd *lst);
 char *befor(char **cmd);
 char witch_red(char *s);
 int dbl_quote_norm(const char *line, int i);

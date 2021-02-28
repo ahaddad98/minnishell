@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:48:06 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 12:43:55 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/28 17:17:21 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void free_pipe(t_pipe *pipe)
     pipe = NULL;
 }
 
-void free_all(t_list_cmd *lst, t_shell *sh)
+void free_all(t_list_cmd *lst)
 {
     t_list_cmd *tmp;
     t_all *all;
@@ -114,4 +114,24 @@ void free_all(t_list_cmd *lst, t_shell *sh)
         lst = tmp;
     }
     lst = NULL;
+}
+
+void    ft_free_arr(void **array)
+{
+    if (*array)
+        free(*array);
+    *array = NULL;
+}
+void    ft_free_2dem_arr(void ***arr)
+{
+    int i;
+    i = 0;
+    while ((*arr)[i])
+    {
+        free((*arr)[i]);
+        (*arr)[i] = NULL;
+        i++;
+    }
+    free(*arr);
+    *arr = NULL;
 }
