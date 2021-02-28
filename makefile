@@ -23,8 +23,6 @@ SRC_NAME=init.c\
 		read.c\
 		lanch.c\
 		parsing.c\
-		get_next_line.c\
-		get_next_line_utils.c\
 		pipe.c\
 		echo.c\
 		condition_check_0.c\
@@ -34,18 +32,16 @@ SRC_NAME=init.c\
 		is_before_redirection.c\
 		errors.c\
 		comand_details.c\
-		redirection_filename.c\
+		redirection_sig_fname.c\
 		sort_seperators_all.c\
 		minishell_space.c\
 		minishell_split.c\
 	 	list_creat.c\
 		list_add.c\
 		list_modify.c\
-		print.c\
 		simple_cmd_pars.c\
 		pars_conditions.c\
 		concats.c\
-		redirection_sign.c\
 		pipe_sort.c\
 		comma_or_pipe_sort.c\
 		split_tools.c\
@@ -65,6 +61,9 @@ SRC_NAME=init.c\
 		pipes1.c\
 		shift_tools.c\
 		pipes_tools.c\
+		is_befor_red_norm.c\
+		redirection.c\
+		print.c\
 
 
 HDR_NAME=minishell.h 

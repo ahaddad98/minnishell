@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:56:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/27 13:28:34 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/28 14:17:21 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void			mise_a_jour_env(t_path *path)
 
 void			cd_cmd(char *nextpath, t_path *path)
 {
+	nextpath = no_quote(slach(nextpath));
+	nextpath = replace_01(nextpath, path);
 	if (cd_cmd_ext(nextpath, path) == 1)
 	{
 		mise_a_jour_env(path);

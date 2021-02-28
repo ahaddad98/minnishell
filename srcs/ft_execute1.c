@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:37:04 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 11:30:47 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/28 14:15:23 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void		ft_builtin2(t_all *all, t_path *path)
 	}
 	else
 	{
+		all->argument = no_quote(slach(all->argument));
+		all->argument = replace_01(all->argument, path);
 		if (all->argument)
 		{
 			all->command = ft_strjoin(all->command, " ");
@@ -80,6 +82,7 @@ void		ft_execute1(t_all *all, t_path *path, t_shell *sh)
 
 	len = 0;
 	all->command = no_quote(slach(all->command));
+	all->command = replace_01(all->command, path);
 	if (!((tmp = shell_space_split(all->command))))
 		return ;
 	if (count_line(tmp) == 1 && is_alpha(all->command))

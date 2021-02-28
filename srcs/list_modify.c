@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_modify.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:18:59 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/23 11:23:23 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/27 21:31:06 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list_cmd *simple_cmd(t_list_cmd *lst, char **simple_cmd)
   i = 0;
   while (simple_cmd[i] != NULL)
   {
+    // puts(simple_cmd[i]);
     new = creat_node(simple_cmd[i]);
     add_cmd(&lst, new);
     i++;
@@ -77,6 +78,7 @@ t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh)
         add_pipe_list(&(lst->pipe), new);
         i++;
       }
+      free_array(tmp, count_line(tmp));
     }
 
     lst = lst->next;

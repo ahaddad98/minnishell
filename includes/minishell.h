@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 10:56:36 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/28 12:48:28 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_line
   t_all *simple_cmd;
   struct s_line *next;
 } t_line;
+
 typedef struct s_use
 {
   char *string;
@@ -140,6 +141,10 @@ typedef struct s_use
   char *arg1;
   char *file_name;
   int i;
+  int j;
+  int o;
+  int k;
+  int w;
   t_redirection *red1;
   t_all *new1;
   int cmd_index;
@@ -281,25 +286,24 @@ int search_2(char *str);
 int kayna(char *str);
 int number_red(char *line);
 int index_1(char *line, int i);
+
 /*****************LIST***************************/
 t_tmp *creat_tmp(char *s1);
 void add_tmp(t_tmp **head, t_tmp *new_cmd);
 t_list_cmd *handle_line(t_read *rd, t_list_cmd *lst, t_path *path);
-t_list_cmd *define_each1_01(t_list_cmd *lst, char *string, char *red,
-                            t_path *path);
-t_all *all_conditions(t_all *all, char **free_sp, int *i);
-t_list_cmd *redirection_sort(t_list_cmd *lst, char *cmd, char *arg,
-                             char *free_sp);
-t_list_cmd *define_each1_02(t_list_cmd *lst, char *string, char *red,
-                            t_path *path);
-t_list_cmd *red_sort_02(t_list_cmd *lst, char *cmd, char *arg, char *red,
+t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red,
                         t_path *path);
-t_list_cmd *sort_all_3(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_all *all_conditions(t_all *all, char **free_sp, int *i);
+t_list_cmd *redirection_sort(t_list_cmd *lst, t_use *use, char *free_sp);
+t_list_cmd *pars_p_r(t_list_cmd *lst, char *string, char *red,
+                     t_path *path);
+t_list_cmd *pars_red(t_list_cmd *lst, char *red, t_use *use);
+t_list_cmd *pars_pipe(t_list_cmd *lst, t_shell *sh, t_path *path);
 t_all *s_cmd_details(char *s1, char *s2, char *s3);
 t_list_cmd *define_each1(char *line);
 t_redirection *creat_node_r(char *content, char *content1);
 void add_red(t_redirection **head, t_redirection *new_cmd);
-t_list_cmd *sort_all_1(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_list_cmd *spl_cmd(t_list_cmd *lst, t_shell *sh, t_path *path);
 t_list_cmd *sort_all_2(t_list_cmd *lst, t_all *all, char **free_sp, t_path *path);
 t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh);
 t_list_cmd *simple_cmd(t_list_cmd *lst, char **simple_cmd);
@@ -313,6 +317,7 @@ t_list_cmd *pipe_define_each(t_list_cmd *lst, t_shell *sh, char **env);
 void add_pipe_list(t_pipe **head, t_pipe *new_cmd);
 t_pipe *creat_node_p(char *content);
 void add_all(t_all **head, t_all *new_cmd);
+
 void print_all(t_list_cmd *lst, t_shell *sh);
 /******************DOLAR*************************/
 char *replace_01(char *tmp, t_path *path);
@@ -336,4 +341,15 @@ int serach_dolar(char *line);
 char *no_antislach(char *str);
 char *slach(char *s);
 int check_n(char *str);
+int ft_strlen_to_char(char *str);
+void free_all(t_list_cmd *lst, t_shell *sh);
+char *befor(char **cmd);
+char witch_red(char *s);
+int dbl_quote_norm(const char *line, int i);
+int len_each(const char *s, int i);
+int each_char_norm(const char *s, int i, int u, int z);
+
+
+//// just for test
+void print_all(t_list_cmd *lst, t_shell *sh);
 #endif

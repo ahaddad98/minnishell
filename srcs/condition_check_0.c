@@ -6,12 +6,11 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:57:14 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/21 10:56:59 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/28 09:22:02 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 char quote_char(char *str, t_shell *sh)
 {
@@ -38,6 +37,25 @@ char quote_char(char *str, t_shell *sh)
   return (0);
 }
 
+int escap_slach(char *line, int i, int u)
+{
+  int k;
+
+  k = 0;
+  u = 0;
+  while (line[i] == '\\' && line[i])
+  {
+    u++;
+    i++;
+  }
+
+  if (u % 2 != 0)
+    k = i + 1;
+  else if (u % 2 == 0)
+    k = i;
+  return (k);
+}
+
 void ft_check_comma(char *line, t_shell *sh)
 {
   int i;
@@ -45,37 +63,14 @@ void ft_check_comma(char *line, t_shell *sh)
 
   i = 0;
   u = 0;
-  sh->comma = 0;
   while (line[i])
   {
-
     if (line[i] == '\\')
-    {
-      u = 0;
-      while (line[i] == '\\')
-      {
-        u++;
-        i++;
-      }
-      // if (line[i] == ';')
-      // {
-      if (u % 2 != 0)
-        i = i + 1;
-      else if (u % 2 == 0)
-        continue;
-    }
-    // if (line[i] == '\'' || line[i] == '\"')
-    // {
+      i = escap_slach(line, i, u);
     else if (line[i] == '\"')
       i = dbl_quote(line, i + 1) + 1;
     else if (line[i] == '\'')
       i = spl_quote(line, i + 1) + 1;
-    // if (line[i] == ';')
-    // {
-    //   sh->comma = 1;
-    //   break;
-    // }
-    // }
     else
     {
       if (line[i] == ';')
@@ -94,35 +89,14 @@ void ft_check_pipe(char *line, t_shell *sh)
 
   i = 0;
   u = 0;
-  sh->pipe = 0;
   while (line[i])
   {
     if (line[i] == '\\')
-    {
-      u = 0;
-      while (line[i] == '\\' && line[i])
-      {
-        u++;
-        i++;
-      }
-
-      if (u % 2 != 0)
-        i++;
-      else if (u % 2 == 0)
-        continue;
-    }
-    // if (line[i] == '\'' || line[i] == '\"')
-    // {
+      i = escap_slach(line, i, u);
     else if (line[i] == '\"')
       i = dbl_quote(line, i + 1) + 1;
     else if (line[i] == '\'')
       i = spl_quote(line, i + 1) + 1;
-    //   if (line[i] == '|')
-    //   {
-    //     sh->pipe = 1;
-    //     break;
-    //   }
-    // }
     else
     {
       if (line[i] == '|')
@@ -138,13 +112,11 @@ void ft_check_pipe(char *line, t_shell *sh)
 int check_one(char *line)
 {
   t_shell sh;
-  sh.pipe = 0;
-  sh.comma = 0;
+
+  ft_bzero(&sh, sizeof(t_shell));
   if (line)
   {
-
     ft_check_comma(line, &sh);
-
     ft_check_pipe(line, &sh);
     if (sh.pipe == 1 && sh.comma == 0)
       return (1);

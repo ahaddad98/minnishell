@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 16:39:14 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 10:38:07 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/28 12:40:02 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list_cmd      *handle_line(t_read *rd, t_list_cmd *lst, t_path *path)
+t_list_cmd *handle_line(t_read *rd, t_list_cmd *lst, t_path *path)
 {
-  int i;
   t_shell sh;
 
-  i = 0;
+  ft_bzero(&sh, sizeof(t_shell));
   lst = NULL;
-  rd->line = ft_strtrim(rd->line, " ");
   if (check_one(rd->line) == 0)
   {
     lst = creat_node(rd->line);
@@ -43,10 +41,8 @@ t_list_cmd      *handle_line(t_read *rd, t_list_cmd *lst, t_path *path)
     lst = simple_cmd(lst, sh.simple_cmd);
   }
   if (check_one(rd->line) != 0)
-  {
     comand_details(lst, &sh, path);
-  // puts("zouhair j3aydani");
-  }
-  // // // printf("==>%d\n", lstsize_1(lst));
+  free(sh.simple_cmd);
+  sh.simple_cmd = NULL;
   return (lst);
 }
