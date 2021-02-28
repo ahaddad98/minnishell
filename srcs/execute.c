@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 11:51:39 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/28 12:01:49 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void				exe(char *p1, char *cmd, char **tmp1, t_path *path)
 	int				a;
 
 	status = 0;
-	puts(p1);
 	a = fork();
 	if (!a)
 	{
@@ -114,7 +113,13 @@ void				exeute(t_path *path, char *cmd)
 			p1 = cmd_slash(tmp, p1, path, tmp1);
 		}
 		p1 = ft_get_cmd(p1, p, tmp1, path);
-		puts(p1);
+		if (!p1)
+		{
+			ft_putstr_fd("bash: ", 1);
+			ft_putstr_fd(tmp1[0], 1);
+			ft_putendl_fd(": commande not found", 1);
+			path->dol_sign = 127;
+		}
 		if (path->d)
 			exe(p1, cmd, tmp1, path);
 	}
