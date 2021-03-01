@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:17:22 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 16:58:53 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/02/27 15:37:37 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,10 @@ long long			ft_atoi_loong1(char *str)
 	return (ret * sign);
 }
 
-void				req_error(char ***tmp)
+void				req_error(void)
 {
 	ft_putendl_fd("exit", 2);
 	ft_putendl_fd("numeric argument required", 2);
-	ft_free_2dem_arr((void ***)tmp);
 	exit(255);
 }
 
@@ -98,19 +97,17 @@ void				ft_exit(t_all *all)
 		if (count_line(tmp) > 1 && check_int(tmp[0]) == 1)
 			ft_putendl_fd("exit: too many arguments", 2);
 		else if (count_line(tmp) != 0 && check_int(tmp[0]) == 0)
-			req_error(&tmp);
+			req_error();
 		else if ((ft_atoi_loong(all->argument) > 9223372036854775807))
-			req_error(&tmp);
+			req_error();
 		else if (count_line(tmp) == 1 && check_int(tmp[0]) == 1)
 		{
 			ft_putendl_fd("exit", 1);
-			ft_free_2dem_arr((void ***)&tmp);
 			exit(ft_atoi_loong1(all->argument));
 		}
 	}
 	else
 	{
-		ft_free_2dem_arr((void ***)&tmp);
 		ft_putendl_fd("exit", 1);
 		exit(0);
 	}

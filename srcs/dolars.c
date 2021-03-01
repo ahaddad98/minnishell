@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 17:50:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 11:49:26 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:50:33 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int serach_dolar(char *line)
     u = 0;
     while (line[i])
     {
-        if (line[i] == '\\')
+        // puts("here");
+        if (line[i] == '\\') /** \\'p'**/
         {
             u = 0;
             while (line[i] == '\\')
