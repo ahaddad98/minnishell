@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 18:40:17 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/01 22:09:25 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,9 @@ int			main(int argc, char **argv, char **env)
 			ft_putstr_fd("\e[1;32mbash$ \e[0;37m", 1);
 		rd.line = malloc(sizeof(char) * BUFFER_SIZE);
 		path.ret = read(0, rd.line, BUFFER_SIZE);
-		ctrl_d(&rd, &path);
 		// if (rd.line[0] != '\n')
 		// {
+		ctrl_d(&rd, &path);
 			sh_initial(&lst, &sh);
 			check_line_error(rd.line, &sh);
 			ft_exe(&sh, &path, &lst, &rd);

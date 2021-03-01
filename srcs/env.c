@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:38:56 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/27 13:57:47 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/01 22:29:36 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		show_env1(char **env)
 	{
 		spl = ft_split(env[i], '=');
 		sort1(env, spl, i, index);
-		free(spl);
+		ft_free_2dem_arr((void ***)&spl);
 		i++;
 	}
 }

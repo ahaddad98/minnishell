@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/01 16:32:57 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/01 22:49:13 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char				*cmd_slash(char **tmp, char *p1, t_path *path, char **tmp1)
 			break ;
 		}
 	}
+	// ft_free_2dem_arr((void ***)&tmp);
 	return (p1);
 }
 
@@ -114,15 +115,18 @@ void				exeute(t_path *path, char *cmd)
 			p1 = cmd_slash(tmp, p1, path, tmp1);
 		}
 		p1 = ft_get_cmd(p1, p, tmp1, path);
-		// if (!p1)
-		// {
-		// 	ft_putstr_fd("bash: ", 1);
-		// 	ft_putstr_fd(tmp1[0], 1);
-		// 	ft_putendl_fd(": commande not found", 1);
-		// 	path->dol_sign = 127;
-		// 	return ;
-		// }
+		if (!p1)
+		{
+			ft_putstr_fd("bash: ", 1);
+			ft_putstr_fd(tmp1[0], 1);
+			ft_putendl_fd(": commande not found", 1);
+			path->dol_sign = 127;
+			return ;
+		}
 		if (path->d)
 			exe(p1, cmd, tmp1, path);
 	}
+	ft_free_2dem_arr((void ***)&tmp1);
+	ft_free_arr((void **)&p1);
+	// ft_free_2dem_arr((void ***)&tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 10:56:36 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/01 22:20:54 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,9 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
+
+void    ft_free_2dem_arr(void ***arr);
+void    ft_free_arr(void **array);
 void  ft_fd(int fd[2], int fd1[2]);
 void		ft_error_free(void);
 void		check_fd(int fd[2], int fd1[2], int i, t_path *path);

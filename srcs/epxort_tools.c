@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   epxort_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:11:37 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/27 14:04:24 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/01 22:33:40 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int			ret_check(char *args)
 			i++;
 		}
 	}
+	ft_free_2dem_arr((void ***)&spl);
 	return (1);
 }
 
 int			checkis_valid_var(char *args)
 {
 	int		i;
-	char	**spl;
 
 	if (ft_strchr(args, '='))
 		return (ret_check(args));
@@ -102,5 +102,7 @@ int			is_modif(char *args, int ch_mod, t_path *path)
 		}
 		i++;
 	}
+	ft_free_2dem_arr((void ***)&spl);
+	ft_free_arr((void **)&s);
 	return (ch_mod);
 }
