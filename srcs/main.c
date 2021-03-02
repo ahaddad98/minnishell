@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 22:09:25 by amine            ###   ########.fr       */
+/*   Updated: 2021/03/02 17:54:40 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,6 @@ char		**ft_strdup_2d(char **str)
 	return (ret);
 }
 
-char		**ft_strjoin_2d(char **env1, char **exp)
-{
-	int			len;
-	int			len1;
-	char		**ret;
-	int			i;
-	int			j;
-
-	j = 0;
-	i = 0;
-	ret = malloc(sizeof(char *) * (len + len1 + 1));
-	while (env1[i])
-	{
-		ret[j] = env1[i];
-		j++;
-		i++;
-	}
-	i = 0;
-	while (exp[i])
-	{
-		ret[j] = exp[i];
-		j++;
-		i++;
-	}
-	ret[j] = NULL;
-	return (ret);
-}
-
 void		ctrl_d(t_read *rd, t_path *path)
 {
 	char		*tmp;
@@ -86,6 +58,7 @@ void		ctrl_d(t_read *rd, t_path *path)
 	if (rd->line[0] == '\0' && !path->dos)
 	{
 		ft_putendl_fd("exit", 1);
+		// ft_free_2dem_arr((void ***)&path->env->fullenv);
 		exit(0);
 	}
 	if (rd->line[path->ret - 1] != '\n')
@@ -171,19 +144,19 @@ int			main(int argc, char **argv, char **env)
 			ft_putstr_fd("\e[1;32mbash$ \e[0;37m", 1);
 		rd.line = malloc(sizeof(char) * BUFFER_SIZE);
 		path.ret = read(0, rd.line, BUFFER_SIZE);
-		// if (rd.line[0] != '\n')
-		// {
 		ctrl_d(&rd, &path);
+		if (rd.line[0] != '\n')
+		{
 			sh_initial(&lst, &sh);
 			check_line_error(rd.line, &sh);
 			ft_exe(&sh, &path, &lst, &rd);
 			if (g_var_glob1 == 2)
 				ft_putstr_fd("Quit: 3\n", 1);
-		// }
-		if (rd.line)
-		{
+		}
+		// if (rd.line)
+		// {
 			free(rd.line);
 			rd.line = NULL;
-		}
+		// }
 	}
 }

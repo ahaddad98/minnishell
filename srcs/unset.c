@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 08:49:25 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 09:08:17 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/02 18:05:42 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void		unset_cmd(char *name, t_path *path)
 				if (path->check)
 					path->env->fullenv[j] = path->env->fullenv[j + 1];
 			}
+			ft_free_2dem_arr((void ***)&spl);
 		}
 		block_tab(path);
 	}
+	ft_free_2dem_arr((void ***)&args);
 }

@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:28:12 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 08:27:57 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/02 18:09:44 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 			get_multi_red(rd, at_rd, path);
 			red_dif(at_rd[count_line(at_rd) - 1], rd[count_line(rd) - 1]);
 			ft_execute1(all, path, sh);
+			ft_free_2dem_arr((void ***)&rd);
+			ft_free_2dem_arr((void ***)&at_rd);
 		}
 		else
 		{

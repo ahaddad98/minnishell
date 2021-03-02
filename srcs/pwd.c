@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 19:15:36 by zjamali           #+#    #+#             */
-/*   Updated: 2021/02/27 18:08:33 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/02 17:59:38 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		print_working_directory(t_path *path)
 	char			*pwd;
 	static char		*tmp;
 
+	puts("lapa");
 	pwd = search_env(path->env->fullenv, "PWD");
 	if (tmp && !pwd && !getcwd(pwd, 100))
 		ft_putendl_fd(tmp, 1);

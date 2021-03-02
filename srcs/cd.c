@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:56:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 22:22:50 by amine            ###   ########.fr       */
+/*   Updated: 2021/03/02 18:29:10 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static	int		cd_cmd_ext(char *nextpath, t_path *path)
 {
 	char		*s;
 
+	// s = NULL;
 	nextpath = ft_strtrim(nextpath, " ");
 	if (!nextpath || !ft_strcmp(nextpath, "~"))
 	{
 		nextpath = get_var_env(path, "$HOME");
 		if (chdir(nextpath) < 0)
 			ft_putendl_fd(strerror(errno), 1);
+		ft_free_arr((void **)&s);
 		return (1);
 	}
 	else if (nextpath[0] == '$')
@@ -35,6 +37,7 @@ static	int		cd_cmd_ext(char *nextpath, t_path *path)
 			if (chdir(nextpath) < 0)
 				ft_putendl_fd(strerror(errno), 1);
 		}
+		ft_free_arr((void **)&s);
 		return (1);
 	}
 	return (0);
@@ -57,13 +60,13 @@ void			mise_a_jour_env(t_path *path)
 			if (!ft_strcmp(spl[0], "PWD"))
 			{
 				path->env->fullenv[i] = ft_strjoin("PWD=", p);
-				ft_free_arr((void **)&p);
 				break ;
 			}
 			i++;
 		}
 		ft_free_2dem_arr((void ***)&spl);
 	}
+	ft_free_arr((void **)&p);
 }
 
 void			cd_cmd(char *nextpath, t_path *path)
@@ -82,4 +85,5 @@ void			cd_cmd(char *nextpath, t_path *path)
 	else
 		path->dol_sign = 0;
 	mise_a_jour_env(path);
+	ft_free_arr((void **)&nextpath);
 }
