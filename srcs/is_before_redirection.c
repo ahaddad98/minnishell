@@ -5,77 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 17:38:53 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/21 17:50:22 by zdnaya           ###   ########.fr       */
+/*   Created: 2021/02/27 17:19:38 by zdnaya            #+#    #+#             */
+/*   Updated: 2021/03/01 15:26:29 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int number_red_1(char *line)
+int norm_index1(char *line, int i)
 {
-  int j;
-  int i;
-
-  j = 0;
-  i = 0;
   int k;
+  int z;
+
   k = 0;
-  while (line[i])
+  z = 0;
+  while (line[i] == '\\' && line[i] != '\0')
   {
-    if (line[i] == '\\')
-    {
-      while (line[i] == '\\')
-      {
-        k++;
-        i++;
-      }
-      if (k % 2 == 0 && (line[i] == '>' || line[i] == '<'))
-        j++;
-    }
-    if (line[i] == '\"')
-      i = dbl_quote(line, i + 1) + 1;
-    if (line[i] == '\'')
-      i = spl_quote(line, i + 1) + 1;
-    if ((line[i] == '>' && line[i + 1] == '>'))
-    {
-      i = i + 2;
-      j++;
-    }
-    if ((line[i] == '>' || line[i] == '<'))
-    {
-      i++;
-      j++;
-    }
-    else
-    {
-      i++;
-    }
+    k++;
+    i++;
   }
-  return (j);
+  if (k % 2 != 0)
+    z = i + 1;
+  else if (k % 2 == 0)
+    z = i;
+  return (z);
 }
 
 int index_1(char *line, int i)
 {
-
-  int k;
-
-  k = 0;
   while (line[i])
   {
     if (line[i] == '\\')
-    {
-      k = 0;
-      while (line[i] == '\\' && line[i] != '\0')
-      {
-        k++;
-        i++;
-      }
-      if (k % 2 != 0)
-        return (i + 1);
-      else if (k % 2 == 0)
-        return (i);
-    }
+      i = norm_index1(line, i);
     if (line[i] == '\"')
     {
       i = dbl_quote(line, i + 1) + 1;
@@ -91,7 +52,7 @@ int index_1(char *line, int i)
   return (i);
 }
 
-char ina_redection(char *s)
+char witch_red(char *s)
 {
   int i;
 
@@ -108,62 +69,6 @@ char ina_redection(char *s)
   }
   return (0);
 }
-char *befor(char **cmd)
-{
-  int j;
-  int i;
-  char *tmp;
-  char **tmp1;
-  char *tmp2;
-  int o;
-  int k;
-
-  j = 0;
-  i = 0;
-  k = 0;
-  o = 0;
-  tmp = NULL;
-  while (cmd[i] != NULL)
-  {
-    j = 0;
-    tmp1 = NULL;
-    if (i == 0 && number_red(cmd[i]) == 0) //|ls \>p|
-      tmp = replace(tmp, cmd[i]);
-    if (i == 0 && number_red(cmd[i]) > 0 && (cmd[i][0] != '>' && cmd[i][0] != '<')) //l> w echo
-    {
-      tmp1 = ft_minishell_split(cmd[i], ina_redection(cmd[i]));
-      tmp = replace(tmp, tmp1[0]);
-    }
-    if (condition_1(cmd, i) == 1)
-      i = i + 1;
-    else if (number_red(cmd[i]) > 0 && (cmd[i][0] != '>' && cmd[i][0] != '<') && i > 0 && kayna(cmd[i - 1]) == 0) //ls <p< o >l && >5> 6>7
-    {
-      if (cmd[i][j] != '>' && cmd[i][j] != '<')
-      {
-        tmp1 = ft_minishell_split(cmd[i], ina_redection(cmd[i]));
-        tmp = replace(tmp, tmp1[0]);
-      }
-      if ((cmd[i][j] == '>' || cmd[i][j] == '<') && cmd[i][j])
-      {
-        while (cmd[i][j] != '\0' && (cmd[i][j] != '\\' || cmd[i][j] != '\'' || cmd[i][j] != '\"'))
-          j++;
-      }
-      while (cmd[i][j] != '\0')
-      {
-        while (cmd[i][j] && cmd[i][j] != '>' && cmd[i][j] != '<' /* && (cmd[i][j] != '\\' && cmd[i][j] != '\'' && cmd[i][j] != '\"') */)
-          j++;
-        if ((cmd[i][j] == '>' || cmd[i][j] == '<') && cmd[i][j + 1] == '\0' && cmd[i] != NULL)
-          i = i + 1;
-        j++;
-      }
-    }
-    else if (number_red(cmd[i]) == 0 && (i >= 1 && kayna(cmd[i - 1]) == 0))
-      tmp = replace(tmp, cmd[i]);
-    i++;
-  }
-
-  return (tmp);
-}
 
 char *is_befor_redirection(char *line, t_shell *sh)
 {
@@ -176,5 +81,7 @@ char *is_befor_redirection(char *line, t_shell *sh)
     return (NULL);
   else
     tmp = ft_strtrim(tmp, "\n");
+  if (cmd)
+    free_2d_char(&(cmd), count_line(cmd));
   return (tmp);
 }

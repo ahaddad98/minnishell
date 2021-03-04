@@ -6,18 +6,17 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/02 17:54:40 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:39:35 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int			g_var_glob1;
+int g_var_glob1;
 
-void		sigint_handler(int sig)
+void sigint_handler(int sig)
 {
-	int		a;
-
+	int a;
 	if (sig == SIGINT)
 	{
 		g_var_glob1 = 1;
@@ -31,12 +30,11 @@ void		sigint_handler(int sig)
 	}
 }
 
-char		**ft_strdup_2d(char **str)
+char **ft_strdup_2d(char **str)
 {
-	int			len;
-	char		**ret;
-	int			i;
-
+	int len;
+	char **ret;
+	int i;
 	i = 0;
 	len = count_line(str);
 	ret = malloc(sizeof(char *) * len + 1);
@@ -50,15 +48,14 @@ char		**ft_strdup_2d(char **str)
 	return (ret);
 }
 
-void		ctrl_d(t_read *rd, t_path *path)
+void ctrl_d(t_read *rd, t_path *path)
 {
-	char		*tmp;
-
+	char *tmp;
 	tmp = NULL;
 	if (rd->line[0] == '\0' && !path->dos)
 	{
 		ft_putendl_fd("exit", 1);
-		// ft_free_2dem_arr((void ***)&path->env->fullenv);
+		ft_free_2dem_arr((void ***)&path->env->fullenv);
 		exit(0);
 	}
 	if (rd->line[path->ret - 1] != '\n')
@@ -75,23 +72,16 @@ void		ctrl_d(t_read *rd, t_path *path)
 		path->p = ft_strjoin(path->p, rd->line);
 		free(tmp);
 		rd->line = ft_strdup(path->p);
-		// free_1d(path->p);
 		if (path->p)
 		{
 			free(path->p);
-			path->p = NULL; 
+			path->p = NULL;
 		}
-		// if (tmp)
-		// {
-		// 	free(tmp);
-		// 	tmp = NULL;
-		// }
-		// puts(rd->line);
 		path->dos = 0;
 	}
 }
 
-void		ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
+void ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 {
 	if (sh->error != 1 && !path->dos)
 	{
@@ -114,24 +104,24 @@ void		ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 			call_pipe(lst, path, sh);
 		else
 			call_getprg(lst, path, sh);
+		free_lst(lst);
 	}
 	else
 		path->dol_sign = 258;
 }
 
-void		get_signals(void)
+void get_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigint_handler);
 }
 
-int			main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
-	t_read			rd;
-	t_shell			sh;
-	t_list_cmd		lst;
-	t_path			path;
-
+	t_read rd;
+	t_shell sh;
+	t_list_cmd lst;
+	t_path path;
 	g_var_glob1 = 0;
 	(void)argc;
 	init(&path);
@@ -143,6 +133,7 @@ int			main(int argc, char **argv, char **env)
 		if (!path.dos && g_var_glob1 != 1)
 			ft_putstr_fd("\e[1;32mbash$ \e[0;37m", 1);
 		rd.line = malloc(sizeof(char) * BUFFER_SIZE);
+		ft_bzero(rd.line, sizeof(char) * BUFFER_SIZE);
 		path.ret = read(0, rd.line, BUFFER_SIZE);
 		ctrl_d(&rd, &path);
 		if (rd.line[0] != '\n')
@@ -153,10 +144,10 @@ int			main(int argc, char **argv, char **env)
 			if (g_var_glob1 == 2)
 				ft_putstr_fd("Quit: 3\n", 1);
 		}
-		// if (rd.line)
-		// {
+		if (rd.line)
+		{
 			free(rd.line);
 			rd.line = NULL;
-		// }
+		}
 	}
 }

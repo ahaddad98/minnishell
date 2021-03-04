@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 10:58:45 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/27 16:22:13 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/04 11:40:05 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ void				sort_exp(char **env, int i, int k)
 
 char				**add_export(char **env__p, t_path *path, int *j, char *ar)
 {
+	char *tmp;
+
 	while (path->env->fullenv[*j])
 	{
+		tmp = env__p[*j];
 		env__p[*j] = ft_strdup(path->env->fullenv[*j]);
+		// ft_free_arr((void **)&tmp);
 		(*j)++;
 	}
 	env__p[(*j)++] = ft_strdup(ar);
@@ -78,6 +82,7 @@ void				export_now(t_path *path, char *args)
 		}
 		env__p[j] = NULL;
 	}
+	ft_free_2dem_arr((void ***)&path->env->fullenv);
 	path->env->fullenv = env__p;
 }
 
@@ -106,4 +111,5 @@ void				export_cmd(char *n, char **env, t_shell *sh, t_path *path)
 		}
 		i++;
 	}
+	ft_free_2dem_arr((void ***)&args);
 }

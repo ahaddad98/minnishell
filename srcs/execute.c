@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/01 22:49:13 by amine            ###   ########.fr       */
+/*   Updated: 2021/03/04 10:45:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void				exe(char *p1, char *cmd, char **tmp1, t_path *path)
 	int				a;
 
 	status = 0;
-	// puts(p1);
 	a = fork();
 	if (!a)
 	{
@@ -79,12 +78,17 @@ char				*ft_get_cmd(char *p1, char *p, char **tmp1, t_path *path)
 char				*cmd_slash(char **tmp, char *p1, t_path *path, char **tmp1)
 {
 	struct stat		buffer;
+	char *tmp2;
 
 	path->i = -1;
 	while (tmp[++path->i])
 	{
+		tmp2 = tmp[path->i];
 		tmp[path->i] = ft_strjoin(tmp[path->i], "/");
+		ft_free_arr((void **)&tmp2);
+		tmp2 = tmp[path->i];
 		tmp[path->i] = ft_strjoin(tmp[path->i], tmp1[0]);
+		ft_free_arr((void **)&tmp2);
 		if (lstat(tmp[path->i], &buffer) == 0)
 		{
 			p1 = ft_strdup(tmp[path->i]);
@@ -113,6 +117,7 @@ void				exeute(t_path *path, char *cmd)
 		{
 			tmp = ft_split(p, ':');
 			p1 = cmd_slash(tmp, p1, path, tmp1);
+			ft_free_2dem_arr((void ***)&tmp);
 		}
 		p1 = ft_get_cmd(p1, p, tmp1, path);
 		if (!p1)
@@ -128,5 +133,4 @@ void				exeute(t_path *path, char *cmd)
 	}
 	ft_free_2dem_arr((void ***)&tmp1);
 	ft_free_arr((void **)&p1);
-	// ft_free_2dem_arr((void ***)&tmp);
 }

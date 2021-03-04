@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 18:48:56 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/22 11:59:39 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:28:00 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ t_pipe *both(t_list_cmd *lst, t_shell *sh)
   t_pipe *pipe;
   char **tmp;
   int i;
-  int j;
 
-  i = 0;
-  j = 0;
   if (pipe_e(lst->cmd, sh) == 1)
   {
     tmp = ft_minishell_split(lst->cmd, '|');
@@ -67,7 +64,8 @@ t_pipe *both(t_list_cmd *lst, t_shell *sh)
       add_pipe_list(&(pipe), new);
       i++;
     }
-    j++;
+    if (tmp)
+      free_2d_char(&(tmp), count_line(tmp));
   }
   return (pipe);
 }

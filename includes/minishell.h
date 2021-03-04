@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/01 22:20:54 by amine            ###   ########.fr       */
+/*   Updated: 2021/03/04 11:54:21 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/libft.h"
-# include <dirent.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/types.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <limits.h>
-# define BUFFER_SIZE 2048
+#define MINISHELL_H
+#include "../libft/libft.h"
+#include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <limits.h>
+#define BUFFER_SIZE 2048
 
 typedef struct s_env
 {
@@ -44,13 +44,13 @@ typedef struct s_path
   char *p;
   char *users;
   int dol_sign;
-  int   d;
+  int d;
   int size;
   pid_t pid;
   int file_desc;
   int i;
   int index;
-  int			check;
+  int check;
   int ret;
   int dos;
 } t_path;
@@ -82,7 +82,6 @@ typedef struct s_shell
   char **simple_cmd;
   int both;
   int redirection;
-  char *sh_direct;
   int sp_quote;
   int db_quote;
   int error;
@@ -101,8 +100,6 @@ typedef struct s_all
 typedef struct s_pipe
 {
   char *str_pipe;
-  char *sh_p_cmd;
-  char *sh_p_arg;
   t_all *all;
   struct s_pipe *next;
 } t_pipe;
@@ -115,8 +112,6 @@ typedef struct s_dol
 typedef struct s_list_cmd
 {
   char *cmd;
-  char *sh_cmd;
-  char *sh_arg;
   t_pipe *pipe;
   t_all *all;
   struct s_list_cmd *next;
@@ -129,6 +124,7 @@ typedef struct s_line
   t_all *simple_cmd;
   struct s_line *next;
 } t_line;
+
 typedef struct s_use
 {
   char *string;
@@ -138,8 +134,15 @@ typedef struct s_use
   char *arg;
   char *sign;
   char *arg1;
+  char *s1;
+  char *str1;
   char *file_name;
   int i;
+  int j;
+  int o;
+  int k;
+  int w;
+  int u;
   t_redirection *red1;
   t_all *new1;
   int cmd_index;
@@ -150,7 +153,6 @@ typedef struct s_use
 typedef struct s_tmp
 {
   char *s1;
-  char *s2;
   struct s_tmp *next;
 } t_tmp;
 
@@ -170,6 +172,8 @@ typedef struct s_dolar
   int w;
   int u;
   int m;
+  int o;
+  int p;
   t_tmp *head;
   t_tmp *c1;
   t_tmp *res_tmp;
@@ -180,12 +184,9 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
-
-void    ft_free_2dem_arr(void ***arr);
-void    ft_free_arr(void **array);
-void  ft_fd(int fd[2], int fd1[2]);
-void		ft_error_free(void);
-void		check_fd(int fd[2], int fd1[2], int i, t_path *path);
+void ft_fd(int fd[2], int fd1[2]);
+void ft_error_free(void);
+void check_fd(int fd[2], int fd1[2], int i, t_path *path);
 int lstsize_2(t_redirection *red);
 void red_dif(char *f1, char *f2);
 int ch_red_dif(t_list_cmd *lst, t_shell *sh);
@@ -222,7 +223,7 @@ int lstsize(t_list_cmd *lst);
 int lstsize_1(t_list_cmd *lst);
 void pipes_cmds(t_path *path, t_list_cmd *lst, int s);
 void ft_execute1(t_all *all, t_path *path, t_shell *sh);
-void    free_1d(char *p);
+void free_1d(char *p);
 /*
 **
 *************parsing*****************
@@ -269,7 +270,6 @@ char *no_quote(char *str);
 void sh_initial(t_list_cmd *lst, t_shell *sh);
 int we_have_quote(char *str, char c);
 // void promp_bash(t_cmd *cmd, t_path *path, int ret, char **line);
-void *free_array(char **array, int ligne);
 int dbl_quote(const char *line, int i);
 int spl_quote(const char *line, int i);
 void ft_stringdel(char **string);
@@ -284,30 +284,29 @@ int search_2(char *str);
 int kayna(char *str);
 int number_red(char *line);
 int index_1(char *line, int i);
+
 /*****************LIST***************************/
 t_tmp *creat_tmp(char *s1);
 void add_tmp(t_tmp **head, t_tmp *new_cmd);
 t_list_cmd *handle_line(t_read *rd, t_list_cmd *lst, t_path *path);
-t_list_cmd *define_each1_01(t_list_cmd *lst, char *string, char *red,
-                            t_path *path);
-t_all *all_conditions(t_all *all, char **free_sp, int *i);
-t_list_cmd *redirection_sort(t_list_cmd *lst, char *cmd, char *arg,
-                             char *free_sp);
-t_list_cmd *define_each1_02(t_list_cmd *lst, char *string, char *red,
-                            t_path *path);
-t_list_cmd *red_sort_02(t_list_cmd *lst, char *cmd, char *arg, char *red,
+t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red,
                         t_path *path);
-t_list_cmd *sort_all_3(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_all *all_conditions(t_all *all, char **free_sp, int *i);
+t_list_cmd *redirection_sort(t_list_cmd *lst, t_use *use, char *free_sp);
+t_list_cmd *pars_p_r(t_list_cmd *lst, char *string, char *red,
+                     t_path *path);
+t_list_cmd *pars_red(t_list_cmd *lst, char *red, t_use *use);
+t_list_cmd *pars_pipe(t_list_cmd *lst, t_shell *sh, t_path *path);
 t_all *s_cmd_details(char *s1, char *s2, char *s3);
 t_list_cmd *define_each1(char *line);
 t_redirection *creat_node_r(char *content, char *content1);
 void add_red(t_redirection **head, t_redirection *new_cmd);
-t_list_cmd *sort_all_1(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_list_cmd *spl_cmd(t_list_cmd *lst, t_shell *sh, t_path *path);
 t_list_cmd *sort_all_2(t_list_cmd *lst, t_all *all, char **free_sp, t_path *path);
 t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh);
 t_list_cmd *simple_cmd(t_list_cmd *lst, char **simple_cmd);
 t_all *s_cmd_details1(char *s1, char *s2);
-t_all *update_all(char *cmd, char *arg, t_redirection *red);
+t_all *update_all(t_all *new_all,char *cmd, char *arg, t_redirection *red);
 void add_cmd(t_list_cmd **head, t_list_cmd *new_obj);
 t_list_cmd *creat_node(char *content);
 t_list_cmd *define_each(t_list_cmd *lst, t_shell *sh, t_path *path);
@@ -316,7 +315,6 @@ t_list_cmd *pipe_define_each(t_list_cmd *lst, t_shell *sh, char **env);
 void add_pipe_list(t_pipe **head, t_pipe *new_cmd);
 t_pipe *creat_node_p(char *content);
 void add_all(t_all **head, t_all *new_cmd);
-void print_all(t_list_cmd *lst, t_shell *sh);
 /******************DOLAR*************************/
 char *replace_01(char *tmp, t_path *path);
 int ft_isalpha2(int c);
@@ -326,7 +324,7 @@ int strlen_tmp(t_tmp *tmp);       // mo7alna7etajha
 int count_dolars(char *s, int i); //7eta hadi
 char *join_dolar(char *s1, char *s2);
 char *dolar(char *s, t_path *path);
-t_tmp *case_07(t_dolar *dol, char *s, char *tmp, t_path *path);
+t_tmp *_norm_case_007(t_dolar *dol, char *s, char *tmp, t_path *path);
 t_tmp *case_06(t_dolar *dol, char *s, char *tmp);
 t_tmp *case_05(t_dolar *dol, char *s, char *tmp);
 t_tmp *case_04(t_dolar *dol, char *s, char *tmp);
@@ -339,4 +337,28 @@ int serach_dolar(char *line);
 char *no_antislach(char *str);
 char *slach(char *s);
 int check_n(char *str);
+int ft_strlen_to_char(char *str);
+char *befor(char **cmd);
+char witch_red(char *s);
+int dbl_quote_norm(const char *line, int i);
+int len_each(const char *s, int i);
+int each_char_norm(const char *s, int i, int u, int z);
+int _condition_norm(char *s, int i);
+char *_no_slash_norm(char *str, t_use *use, char *tmp);
+char *_no_slash_norm1(char *str, t_use *use, char *tmp);
+int count_slash(char *s, int i);
+int alloc_slach(char *s, int i);
+char *_no_slash_norm2(char *str, t_use *use, char *tmp);
+void free_dolar(t_tmp **dol);
+t_tmp *case_07(t_dolar *dol, char *s, char *tmp, t_path *path);
+//// just for test
+void print_all(t_list_cmd *lst);
+/*************FREE************/
+void free_str_dol(t_dolar *dol);
+void ft_free_2dem_arr(void ***arr);
+void ft_free_arr(void **array);
+void free_lst(t_list_cmd *lst);
+void free_2d_char(char ***array, int len);
+void free_pipe(t_pipe *pipe);
+void free_all_node(t_all **all);
 #endif

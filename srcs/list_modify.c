@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:18:59 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/23 11:23:23 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/03 18:54:41 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list_cmd *simple_cmd(t_list_cmd *lst, char **simple_cmd)
   i = 0;
   while (simple_cmd[i] != NULL)
   {
+    // puts(simple_cmd[i]);
     new = creat_node(simple_cmd[i]);
     add_cmd(&lst, new);
     i++;
@@ -30,6 +31,7 @@ t_all *s_cmd_details1(char *s1, char *s2)
 {
   int i;
   t_all *all;
+  char *tmp;
 
   i = 0;
   all = malloc(sizeof(t_all));
@@ -59,26 +61,25 @@ t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh)
   t_list_cmd *list1;
   char **tmp;
   t_pipe *new;
+  t_pipe *tmp1;
   int i;
 
   i = 0;
   list1 = lst;
   while (lst != NULL)
   {
-    // puts(lst->cmd);
     if (pipe_e(lst->cmd, sh) == 1)
     {
-      // puts("here I m");
       i = 0;
       tmp = ft_minishell_split(lst->cmd, '|');
       while (tmp[i] != NULL)
       {
         new = creat_node_p(tmp[i]);
-        add_pipe_list(&(lst->pipe), new);
+        add_pipe_list(&(lst->pipe),new);
         i++;
       }
+      free_2d_char(&(tmp), count_line(tmp));
     }
-
     lst = lst->next;
   }
   lst = list1;

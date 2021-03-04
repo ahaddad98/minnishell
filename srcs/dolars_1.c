@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 10:26:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/23 16:35:22 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/02/28 16:42:22 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,40 +78,3 @@ int strlen_tmp(t_tmp *tmp)
     return (i);
 }
 
-char *join_dolar(char *s1, char *s2)
-{
-    char *s3;
-    unsigned int len;
-
-    if (!s1 && !s2)
-        return (NULL);
-    if (!s1 && s2)
-        return (s2);
-    if (!s2 && s1)
-        return (s1);
-    len = 0;
-    s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-    if (s3 == NULL)
-        return (NULL);
-    while (*s1)
-        s3[len++] = *(s1++);
-    while (*s2)
-        s3[len++] = *(s2++);
-    s3[len] = '\0';
-    return (s3);
-}
-
-int count_dolars(char *s, int i)
-{
-    int j;
-
-    j = 0;
-    while (s[i] == '$' && s[i])
-    {
-        j++;
-        i++;
-    }
-    return (j);
-}
-
-//  echo "ls \\\\" : syntax error

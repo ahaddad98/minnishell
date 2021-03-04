@@ -13,26 +13,18 @@ SRC_NAME=init.c\
 		pwd.c\
 		execute.c\
 		tools.c\
+    	directory.c\
 		cd.c\
 		shift.c\
 		var_env.c\
 		export.c\
 		unset.c\
 		pipes.c\
-		echo.c\
-		exit.c\
-		ft_execute1.c\
-		epxort_tools.c\
-		pipes1.c\
-		shift_tools.c\
-		pipes_tools.c\
-		main.c\
 		read.c\
 		lanch.c\
 		parsing.c\
-		get_next_line.c\
-		get_next_line_utils.c\
 		pipe.c\
+		echo.c\
 		condition_check_0.c\
 		condition_check_1.c\
 		condition_check_2.c\
@@ -40,30 +32,44 @@ SRC_NAME=init.c\
 		is_before_redirection.c\
 		errors.c\
 		comand_details.c\
-		redirection_filename.c\
+		redirection_sig_fname.c\
 		sort_seperators_all.c\
 		minishell_space.c\
 		minishell_split.c\
 	 	list_creat.c\
 		list_add.c\
 		list_modify.c\
-		print.c\
 		simple_cmd_pars.c\
 		pars_conditions.c\
 		concats.c\
-		redirection_sign.c\
 		pipe_sort.c\
 		comma_or_pipe_sort.c\
 		split_tools.c\
+		main.c\
+		exit.c\
 		redirection_tools.c\
 		free.c\
 		dolars.c\
-		dolars_1.c\
-		dolars_2.c\
 		no_quote.c\
 		replace.c\
 		spl_cmd.c\
 		ft_strstr.c\
+		ft_execute1.c\
+		epxort_tools.c\
+		pipes1.c\
+		shift_tools.c\
+		pipes_tools.c\
+		is_befor_red_norm.c\
+		redirection.c\
+		dolars_1.c\
+		dolars_2.c\
+		 dolar_3.c\
+		 dolar_4.c\
+		 dolar_5.c\
+		free_lst.c\
+		no_antislash.c\
+		norm_antislach.c\
+		print.c\
 
 
 HDR_NAME=minishell.h 
@@ -78,22 +84,21 @@ LIB= libft.a
 FLAGS= 
 LLIB_FLAG= -L$(LIB_PATH) libft/libft.a
 H_FLAG= -I $(HDR_PATH)
-#***************************************************************************** #
 
-COMP= gcc
+COMP= gcc 
 
 all: lib  $(NAME) 
 
 $(NAME) : $(LIB_PATH)/$(LIB) $(OBJ)
-	@rm -rf minishell
-	@$(COMP) -g $(H_FLAG) $(OBJ) $(LLIB_FLAG) -o $@
+	@rm -rf miniRT
+	@$(COMP) $(H_FLAG) $(LLIB_FLAG) $(OBJ) -o $@
 
 lib:
 	@make -sC $(LIB_PATH)
 
 $(OBJ_PATH)/%.o:  $(SRC_PATH)/%.c $(HDR)
 	@mkdir -p $(OBJ_PATH) 
-	@$(COMP)  $(FLAGS) $(H_FLAG) -g -o $@ -c $<
+	@$(COMP) $(FLAGS) $(H_FLAG)  -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ_PATH)

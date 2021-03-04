@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:44:55 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/23 10:39:32 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:00:59 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,15 @@ char *replace(char *tmp, char *s2)
     if (!tmp && !s2)
         return (NULL);
     if (tmp == NULL)
+    {
+        // puts("1");
         tmp = ft_strdup(s2);
+    }
     else
+    {
+        // puts("2");
         tmp = concat_space(s2, tmp);
-
+    }
     return (tmp);
 }
 

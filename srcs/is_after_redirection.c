@@ -5,23 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 17:37:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/21 17:48:31 by zdnaya           ###   ########.fr       */
+/*   Created: 2021/02/27 15:41:55 by zdnaya            #+#    #+#             */
+/*   Updated: 2021/03/03 18:16:23 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-char *alloc_red1(char *line)
-{
 
-  int i = 0;
-  int len;
+char *alloc_red1(char *line, int i)
+{
   char *res;
   int k;
 
   k = 0;
+  i = 0;
   res = NULL;
-  len = ft_strlen(line);
   while (line[i] != '>' && line[i] != '<' && line[i])
   {
     if (line[i] == '\\')
@@ -32,7 +30,7 @@ char *alloc_red1(char *line)
       i = spl_quote(line, i + 1);
     i++;
   }
-  if (!(res = malloc(sizeof(char) * (len - i + 1))))
+  if (!(res = malloc(sizeof(char) * ((ft_strlen(line)) - i + 1))))
     return (NULL);
   while (line[i] != '\0')
     res[k++] = line[i++];
@@ -40,90 +38,134 @@ char *alloc_red1(char *line)
   return (res);
 }
 
+char *after_norm(char **line, char *tmp, char *tmp2, t_use *use)
+{
+  tmp2 = alloc_red1(line[use->i], use->o);
+  if (!tmp2)
+    use->i++;
+  else
+  {
+    if (norm_red(tmp2) == 3)
+    {
+      tmp = replace(tmp, tmp2);
+      free(tmp2);
+    }
+    use->i++;
+  }
+  return (tmp);
+}
+
+char *after_norm1(char **line, char *tmp, t_use *use)
+{
+  if ((line[use->i][0] == '>' || line[use->i][0] == '<'))
+  {
+   tmp = replace(tmp, line[use->i]);
+    use->i++;
+  }
+  else if ((line[use->i][0] != '>' || line[use->i][0] != '<') && use->i >= 1 && kayna(line[use->i - 1]))
+  {
+    tmp = replace(tmp, line[use->i]);
+    use->i++;
+  }
+  else
+  {
+    tmp = replace(tmp, alloc_red1(line[use->i], use->o));
+    free(alloc_red1(line[use->i], use->o));
+    use->i++;
+  }
+  return (tmp);
+}
+
+int condition_if(char **line, t_use use)
+{
+  if (use.i == 0 && search_2(line[use.i]) == 0)
+    return (1);
+  else if (condition_1(line, use.i) == 1 && line[use.i + 1])
+    return (1);
+  else if (use.i >= 1 && kayna2(line[use.i - 1]) == 0 && search_2(line[use.i]) == 0 && count(line[use.i - 1]) == 0)
+    return (1);
+  else
+    return (0);
+}
+
+char *norm_first(char **line, t_use *use, char *tmp)
+{
+  if (use->i == 0 && search_2(line[use->i]) == 0)
+    use->i++;
+  else if (condition_1(line, use->i) == 1 && line[use->i + 1])
+  {
+    tmp = replace(tmp, line[use->i]);
+    tmp = replace(tmp, line[use->i + 1]);
+    use->i = use->i + 2;
+  }
+  else if (use->i >= 1 && kayna2(line[use->i - 1]) == 0 && search_2(line[use->i]) == 0 && count(line[use->i - 1]) == 0)
+    use->i++;
+  return (tmp);
+}
+
+char *last_norm(char **line, t_use *use, char *tmp, char *tmp2)
+{
+
+  if ((norm_red(line[use->i]) == 1 || norm_red(line[use->i]) == 2))
+    tmp = after_norm(line, tmp, tmp2, use);
+  else if (check_redirection(line[use->i]) != 0)
+    tmp = after_norm1(line, tmp, use);
+  else if (use->i >= 1 && kayna2(tmp) == 1 && condition_2(line, use->i) == 0)
+  {
+    tmp = replace(tmp, line[use->i]);
+    use->i++;
+  }
+  free(tmp2);
+  tmp2 = NULL;
+  return (tmp);
+}
 
 char *is_after_redirection(char *s, t_shell *sh)
 {
   char *tmp;
-  int index;
-  int len;
-  int len1;
-  int len2;
-  int start;
-  int i;
-  int o;
-  int k;
-  int j;
+  t_use use;
   char *tmp2;
   char **line;
+  char *one;
 
-  o = 0;
-  k = 0;
   tmp2 = NULL;
   tmp = NULL;
   line = shell_space_split(s);
-  i = 0;
-  while (line[i])
+  ft_bzero(&use, sizeof(t_use));
+  while (line[use.i])
   {
-    j = 0;
-    if (i == 0 && search_2(line[i]) == 0)
-      i++;
-    else if (condition_1(line, i) == 1 && line[i + 1])
+    if (condition_if(line, use) == 1)
     {
-      tmp = replace(tmp, line[i]);
-      tmp = replace(tmp, line[i + 1]);
-      i = i + 2;
+      // puts("a");
+      one = tmp;
+      tmp = norm_first(line, &use, tmp);
+      if (one)
+      {
+        free(one);
+        one = NULL;
+      }
+      one = tmp;
     }
-    else if (i >= 1 && kayna2(line[i - 1]) == 0 && search_2(line[i]) == 0 && count(line[i - 1]) == 0)
-      i++;
     else
     {
-      if (norm_red(line[i]) == 1 || norm_red(line[i]) == 2)
+      // puts("b");
+      one = tmp;
+      tmp = last_norm(line, &use, tmp, tmp2);
+      if (one)
       {
-        tmp2 = alloc_red1(line[i]);
-        if (!tmp2)
-          i++;
-        else
-        {
-          if (norm_red(tmp2) == 3)
-          {
-            tmp = replace(tmp, tmp2);
-            free(tmp2);
-          }
-          i++;
-        }
+        free(one);
+        one = NULL;
       }
-      else if (check_redirection(line[i]) != 0)
-      {
-        if ((line[i][0] == '>' || line[i][0] == '<'))
-        {
-          tmp = replace(tmp, line[i]);
-          i++;
-        }
-        else if ((line[i][0] != '>' || line[i][0] != '<') && i >= 1 && kayna(line[i - 1])) // >1>5> 3>9 echo samir>9>30> 90
-        {
-          tmp = replace(tmp, line[i]);
-          i++;
-        }
-        else
-        {
-          tmp = replace(tmp, alloc_red1(line[i]));
-          free(alloc_red1(line[i]));
-          i++;
-        }
-      }
-      else if (i >= 1 && kayna2(tmp) == 1 && condition_2(line, i) == 0) // khalif dik kayna2 raha mohima >1>5> 3>9 echo samir>9>30> 90
-      {
-        tmp = replace(tmp, line[i]);
-        i++;
-      }
+      one = tmp;
     }
   }
-  ft_stringdel(line);
+  free_2d_char(&(line), count_line(line));
   if (!tmp)
     return (NULL);
   else
   {
     tmp = ft_strtrim(tmp, "\n");
+    free(one);
   }
   return (tmp);
 }

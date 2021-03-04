@@ -3,52 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   split_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 16:34:53 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/23 17:08:04 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/01 09:44:41 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int dbl_quote_norm(const char *line, int i)
+{
+    int u;
+
+    u = 0;
+    while (line[i] == '\\')
+    {
+        u++;
+        i++;
+    }
+    return (u);
+}
 int dbl_quote(const char *line, int i)
 {
     int j;
-    int u;
 
     j = 0;
-
-    // puts(&line[i]);
     while (line[i])
     {
-        // puts("heere");
         if (line[i] == '\\')
         {
-            u = 0;
-            while (line[i] == '\\')
+            j = dbl_quote_norm(line, i);
+            i = i + j;
+            if (line[i] == '\"')
             {
-                u++;
-                i++;
-            }
-            if (line[i] == 34)
-            {
-                if (u % 2 != 0)
+                if (j % 2 != 0)
                     i++;
                 else
-                {
-                    j = i;
-                    break;
-                }
+                    return (i);
             }
         }
         if (line[i] == '\"')
-        {
-            j = i;
-            break;
-        }
+            return (i);
         i++;
     }
+    j = 0;
     return (j);
 }
 
@@ -59,7 +58,6 @@ int spl_quote(const char *line, int i)
     j = 0;
     while (line[i])
     {
-        // puts(&line[i]);
         if (line[i] == '\'')
         {
             j = i;
@@ -68,15 +66,4 @@ int spl_quote(const char *line, int i)
         i++;
     }
     return (j);
-}
-void *free_array(char **array, int ligne)
-{
-    ligne = ligne - 1;
-    while (ligne > 0)
-    {
-        free(array[ligne]);
-        ligne--;
-    }
-    free(array);
-    return (NULL);
 }

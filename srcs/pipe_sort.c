@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:56:50 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/22 11:58:53 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/03 07:32:44 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void part_one(t_list_cmd *lst, t_shell *sh, t_path *path)
     {
       string = is_befor_redirection(lst->pipe->str_pipe, sh);
       red = is_after_redirection(lst->pipe->str_pipe, sh);
-      lst = define_each1_02(lst, string, red, path);
+      lst = pars_p_r(lst, string, red, path);
     }
     else
-      lst = sort_all_3(lst, sh, path);
+      lst = pars_pipe(lst, sh, path);
     lst->pipe = lst->pipe->next;
   }
   lst->pipe = pipe;

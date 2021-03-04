@@ -6,64 +6,61 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 00:03:18 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/02/24 14:36:32 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/01 19:17:31 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int norm_ligne1(char *s, int i, char c)
+int index_norm1(char *s, int i)
 {
-    int u;
+    if (s[i] == '\"')
+    {
+        i = dbl_quote(s, i + 1);
+        return (i);
+    }
+    if (s[i] == '\'')
+    {
+        i = spl_quote(s, i + 1);
+        return (i);
+    }
+    else
+        return (i);
+}
+int norm_ligne1(char *s, int i, char c, int u)
+{
     int z;
 
-    u = 0;
     z = 0;
     while (s[i] && (s[i] == '\'' || s[i] == '\"' || s[i] == '\\'))
     {
-        if (s[i] == '\\' && s[i]) /** \\'p'**/
+        if (s[i] == '\\')
         {
-            u = 0;
-            while (s[i] == '\\')
-            {
-                u++;
+            u = dbl_quote_norm(s, i);
+            i = dbl_quote_norm(s, i) + i;
+            if (s[i] == c)
+                z = 1;
+            if (u % 2 != 0)
                 i++;
-            }
-            if (s[i] == 'c')
-            {
-                if (u % 2 != 0)
-                    i++;
-                else if (u % 2 == 0)
-                    continue;
-            }
-            else
-            {
-                if (u % 2 != 0)
-                {
-                    i++;
-                    z = 1;
-                }
-                else
-                    z = 1;
-            }
+            else if (u % 2 == 0 && z == 1)
+                return (i);
+            else if (u % 2 == 0 && z == 0)
+                i++;
         }
-        if (s[i] == '\"' && z == 0)
-            i = dbl_quote(s, i + 1);
-        if (s[i] == '\'' && z == 0)
-            i = spl_quote(s, i + 1);
+        i = index_norm1(s, i);
         i++;
     }
-    // while (s[i] &&  s[i] != 'c')
-    //     i++;
     return (i);
 }
 int ligne1(char *s, char c)
 {
     int i;
     int j;
+    int u;
 
     i = 0;
     j = 0;
+    u = 0;
     while (s[i])
     {
         while (s[i] && (s[i] == c))
@@ -71,103 +68,81 @@ int ligne1(char *s, char c)
         while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'' && s[i] != '\\')
             i++;
         if (s[i] && (s[i] == '\'' || s[i] == '\"' || s[i] == '\\'))
-        {
-            i = norm_ligne1(s, i, c);
-            // puts(&s[i]);
-        }
+            i = norm_ligne1(s, i, c, u);
         while (s[i] && s[i] != c && s[i] != '\"' && s[i] != '\'' && s[i] != '\\')
             i++;
-
-        while ((s[i] == c) && s[i])
+        while (s[i] == c)
             i++;
         j++;
     }
     return (j);
 }
-
-int each_char1(char *s, int i, char c)
+int len_each1(const char *s, int i, char c)
 {
     int len;
-    int u;
-    int z;
 
     len = 0;
-    u = 0;
-    z = 0;
     while (s[i] && (s[i] == c))
     {
         i++;
         len++;
     }
+    return (len);
+}
+
+int each_char1(char *s, int i, char c)
+{
+    int u;
+    int z;
+    int len;
+
+    z = 0;
+    len = len_each1(s, i, c);
+    i = len + i;
     while (s[i] && s[i] != c)
     {
-        if (s[i] == '\\' && s[i]) /** \\'p'**/
+        if (s[i] == '\\' && s[i])
         {
-            u = 0;
-            while (s[i] == '\\')
-            {
-                u++;
+            u = dbl_quote_norm(s, i);
+            i = dbl_quote_norm(s, i) + i;
+            if (s[i] == c)
+                z = 1;
+            if (u % 2 != 0)
                 i++;
-            }
-            if (s[i] == 'c')
-            {
-                if (u % 2 != 0)
-                    i++;
-                else if (u % 2 == 0)
-                    continue;
-            }
             else
-            {
-                if (u % 2 != 0)
-                {
-                    i++;
-                    z = 1;
-                }
-                else
-                    z = 1;
-            }
+                i = each_char_norm(s, i, u, z);
         }
-        if (s[i] == '\"' && z == 0)
-        {
-            i = dbl_quote(s, i + 1);
-        }
-        if (s[i] == '\'' && z == 0)
-            i = spl_quote(s, i + 1);
+        i = index_norm1(s, i);
         i++;
     }
     return (i - len);
 }
 char **colomn1(char **array, char *s, char c, int y)
 {
-    int o;
-    int i;
-    int k;
-    int w;
+    t_use use;
 
-    i = 0;
-    o = 0;
-    k = 0;
-    w = 0;
-    while (s[o] && s[o] == c)
-        o++;
-    while (w < y)
+    ft_bzero(&use, sizeof(t_use));
+    while (s[use.o] && s[use.o] == c)
+        use.o++;
+    while (use.w < y)
     {
-        i = 0;
-        if (!(array[w] = malloc(sizeof(char) * (each_char1(s, o, c) - k + 1))))
-            free_array(array, w);
-        k = each_char1(s, o, c);
-        while (s[o] && o < k)
+        use.i = 0;
+        if (!(array[use.w] = malloc(sizeof(char) * (each_char1(s, use.o, c) - use.k + 1))))
+            free_2d_char(&(array), use.w);
+        use.k = each_char1(s, use.o, c);
+        while (s[use.o] && use.o < use.k)
         {
-            if (s[o] && s[o] == c && s[o - 1] != '\\' && s[o - 1] != '\'' && s[o - 1] != '\"')
-                o++;
-            array[w][i++] = s[o++];
+            if (s[use.o] && s[use.o] == c && s[use.o - 1] != '\\' && s[use.o - 1] != '\'' && s[use.o - 1] != '\"')
+                use.o++;
+            array[use.w][use.i++] = s[use.o++];
         }
-        array[w][i] = '\0';
-        while (s[o] && (s[o] == c))
-            o++;
-        w++;
+        array[use.w][use.i] = '\0';
+        while (s[use.o] && (s[use.o] == c))
+            use.o++;
+        use.w++;
     }
-    array[w] = NULL;
+    array[use.w] = NULL;
+    ft_stringdel(&s);
     return (array);
 }
 
@@ -177,7 +152,7 @@ char **ft_minishell_split(const char *line, char c)
     char *s;
     int y;
 
-    s = strdup(line);
+    s = ft_strdup(line);
     y = ligne1(s, c);
     if (!(array = malloc(sizeof(char *) * (y + 1))))
         return (NULL);
