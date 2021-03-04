@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 10:58:45 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 11:40:05 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/04 17:45:24 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char				**add_export(char **env__p, t_path *path, int *j, char *ar)
 	{
 		tmp = env__p[*j];
 		env__p[*j] = ft_strdup(path->env->fullenv[*j]);
-		// ft_free_arr((void **)&tmp);
 		(*j)++;
 	}
 	env__p[(*j)++] = ft_strdup(ar);

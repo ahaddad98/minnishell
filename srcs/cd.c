@@ -6,15 +6,15 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:56:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 11:20:11 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/04 17:29:32 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int cd_cmd_ext(char *nextpath, t_path *path)
+static int		cd_cmd_ext(char *nextpath, t_path *path)
 {
-	char *s;
+	char			*s;
 
 	if (!nextpath || !ft_strcmp(nextpath, "~"))
 	{
@@ -41,12 +41,12 @@ static int cd_cmd_ext(char *nextpath, t_path *path)
 	return (0);
 }
 
-void mise_a_jour_env(t_path *path)
+void			mise_a_jour_env(t_path *path)
 {
-	int i;
-	char **spl;
-	char *tmp;
-	char *p;
+	int				i;
+	char			**spl;
+	char			*tmp;
+	char			*p;
 
 	i = 0;
 	p = getcwd(NULL, 100);
@@ -72,7 +72,7 @@ void mise_a_jour_env(t_path *path)
 	ft_free_arr((void **)&p);
 }
 
-void cd_cmd(char *nextpath, t_path *path)
+void			cd_cmd(char *nextpath, t_path *path)
 {
 	if (cd_cmd_ext(nextpath, path) == 1)
 	{

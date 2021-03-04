@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 14:39:35 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/04 17:48:07 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int g_var_glob1;
 
-void sigint_handler(int sig)
+void			sigint_handler(int sig)
 {
-	int a;
+	int			a;
+
 	if (sig == SIGINT)
 	{
 		g_var_glob1 = 1;
@@ -30,11 +31,12 @@ void sigint_handler(int sig)
 	}
 }
 
-char **ft_strdup_2d(char **str)
+char			**ft_strdup_2d(char **str)
 {
-	int len;
-	char **ret;
-	int i;
+	int			len;
+	char		**ret;
+	int			i;
+
 	i = 0;
 	len = count_line(str);
 	ret = malloc(sizeof(char *) * len + 1);
@@ -48,9 +50,10 @@ char **ft_strdup_2d(char **str)
 	return (ret);
 }
 
-void ctrl_d(t_read *rd, t_path *path)
+void			ctrl_d(t_read *rd, t_path *path)
 {
-	char *tmp;
+	char			*tmp;
+
 	tmp = NULL;
 	if (rd->line[0] == '\0' && !path->dos)
 	{
@@ -81,7 +84,7 @@ void ctrl_d(t_read *rd, t_path *path)
 	}
 }
 
-void ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
+void			ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 {
 	if (sh->error != 1 && !path->dos)
 	{
@@ -110,18 +113,19 @@ void ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 		path->dol_sign = 258;
 }
 
-void get_signals(void)
+void			get_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigint_handler);
 }
 
-int main(int argc, char **argv, char **env)
+int				main(int argc, char **argv, char **env)
 {
-	t_read rd;
-	t_shell sh;
-	t_list_cmd lst;
-	t_path path;
+	t_read				rd;
+	t_shell				sh;
+	t_list_cmd			lst;
+	t_path				path;
+
 	g_var_glob1 = 0;
 	(void)argc;
 	init(&path);

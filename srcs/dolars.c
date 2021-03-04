@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolars.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 17:50:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 18:49:17 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/04 17:03:03 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ char *dolar(char *str, t_path *path)
     dol.head = tmp;
     free_dolar(&(dol.head));
     ft_stringdel(&s);
-    free_str_dol(&dol);
+    // free_str_dol(&dol);
     return (result);
 }

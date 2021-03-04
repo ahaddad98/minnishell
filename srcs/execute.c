@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 10:45:54 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/04 18:44:59 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char				*ft_get_cmd(char *p1, char *p, char **tmp1, t_path *path)
 char				*cmd_slash(char **tmp, char *p1, t_path *path, char **tmp1)
 {
 	struct stat		buffer;
-	char *tmp2;
+	char			*tmp2;
 
 	path->i = -1;
 	while (tmp[++path->i])
@@ -96,8 +96,15 @@ char				*cmd_slash(char **tmp, char *p1, t_path *path, char **tmp1)
 			break ;
 		}
 	}
-	// ft_free_2dem_arr((void ***)&tmp);
-	return (p1);
+A	return (p1);
+}
+
+void				ft_puts_err(char **tmp1, t_path *path)
+{
+	ft_putstr_fd("bash: ", 1);
+	ft_putstr_fd(tmp1[0], 1);
+	ft_putendl_fd(": commande not found", 1);
+	path->dol_sign = 127;
 }
 
 void				exeute(t_path *path, char *cmd)
@@ -121,13 +128,7 @@ void				exeute(t_path *path, char *cmd)
 		}
 		p1 = ft_get_cmd(p1, p, tmp1, path);
 		if (!p1)
-		{
-			ft_putstr_fd("bash: ", 1);
-			ft_putstr_fd(tmp1[0], 1);
-			ft_putendl_fd(": commande not found", 1);
-			path->dol_sign = 127;
-			return ;
-		}
+			return ((void)ft_puts_err(tmp1, path));
 		if (path->d)
 			exe(p1, cmd, tmp1, path);
 	}
