@@ -7,6 +7,8 @@ LIB_PATH= libft
 
 SRC_NAME=init.c\
 		search_env.c\
+		main_tools.c\
+		shift_tools2.c\
 		env.c\
 		minishell.c\
 		read_line.c\

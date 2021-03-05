@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 11:54:21 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 15:07:28 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,10 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
+void		if_exit_red(t_all *all, t_path *path);
+void			ctrl_d(t_read *rd, t_path *path);
+void			ft_free_ex(t_path *path);
+char			**ft_strdup_2d(char **str);
 void ft_fd(int fd[2], int fd1[2]);
 void ft_error_free(void);
 void check_fd(int fd[2], int fd1[2], int i, t_path *path);

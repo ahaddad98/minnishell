@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 18:44:59 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 14:24:55 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char				*cmd_slash(char **tmp, char *p1, t_path *path, char **tmp1)
 			break ;
 		}
 	}
-A	return (p1);
+	return (p1);
 }
 
 void				ft_puts_err(char **tmp1, t_path *path)

@@ -6,26 +6,11 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:28:12 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/02 18:09:44 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 15:07:58 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void		if_exit_red(t_all *all, t_path *path)
-{
-	if (ft_strcmp(all->command, "exit") == 0)
-	{
-		ft_putendl_fd(all->command, 1);
-		if (!ft_strncmp(">>", all->red->sign, 2))
-			path->file_desc = open(all->red->file_name, O_WRONLY | O_CREAT |
-					O_APPEND, 0777);
-		else if (!ft_strncmp(all->red->sign, ">", 1))
-			path->file_desc = open(all->red->file_name, O_WRONLY | O_CREAT |
-					O_TRUNC, 0777);
-		exit(0);
-	}
-}
 
 void		check_dup(t_path *path, t_shell *sh, t_all *all, int index)
 {
@@ -111,8 +96,6 @@ void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 	char		**rd;
 	char		**at_rd;
 
-	path->index = 0;
-	path->i = 0;
 	if_exit_red(all, path);
 	if ((path->pid = fork()) == 0)
 	{

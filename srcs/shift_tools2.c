@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   shift_tools2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 17:10:45 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 14:39:06 by ahaddad          ###   ########.fr       */
+/*   Created: 2021/03/05 15:06:50 by ahaddad           #+#    #+#             */
+/*   Updated: 2021/03/05 15:08:35 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void		init(t_path *path)
+void		if_exit_red(t_all *all, t_path *path)
 {
-	path->ret = 0;
-	path->dos = 0;
-	path->ret = 0;
-	path->p = NULL;
-	path->dol_sign = 0;
-	path->p = NULL;
-	path->env = malloc(sizeof(t_env));
-}
-
-void		sh_initial(t_list_cmd *lst, t_shell *sh)
-{
-	t_dol dol;
-
-	dol.dol_s = 0;
-	sh->pipe = 0;
-	sh->comma = 0;
-	sh->count_pipe = 0;
-	sh->both = 0;
-	sh->redirection = 0;
-	sh->count_comma = 0;
-	sh->sp_quote = 0;
-	sh->db_quote = 0;
-	sh->error = 0;
+	path->index = 0;
+	path->i = 0;
+	if (ft_strcmp(all->command, "exit") == 0)
+	{
+		ft_putendl_fd(all->command, 1);
+		if (!ft_strncmp(">>", all->red->sign, 2))
+			path->file_desc = open(all->red->file_name, O_WRONLY | O_CREAT |
+					O_APPEND, 0777);
+		else if (!ft_strncmp(all->red->sign, ">", 1))
+			path->file_desc = open(all->red->file_name, O_WRONLY | O_CREAT |
+					O_TRUNC, 0777);
+		exit(0);
+	}
 }
