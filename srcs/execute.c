@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 14:24:55 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 17:40:47 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void				exe(char *p1, char *cmd, char **tmp1, t_path *path)
 			{
 				ft_putstr_fd("bash: ", 1);
 				ft_putstr_fd(p1, 1);
-				ft_putendl_fd(": commande not found99", 1);
+				ft_putendl_fd(": commande not found", 1);
 			}
 		exit(0);
 	}
@@ -127,8 +127,8 @@ void				exeute(t_path *path, char *cmd)
 			ft_free_2dem_arr((void ***)&tmp);
 		}
 		p1 = ft_get_cmd(p1, p, tmp1, path);
-		if (!p1)
-			return ((void)ft_puts_err(tmp1, path));
+		// if (!p1)
+		// 	return ((void)ft_puts_err(tmp1, path));
 		if (path->d)
 			exe(p1, cmd, tmp1, path);
 	}

@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:55:38 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 14:56:22 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:33:01 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			ft_free_ex(t_path *path)
 void			ctrl_d(t_read *rd, t_path *path)
 {
 	char			*tmp;
-
+	
 	if (rd->line[0] == '\0' && !path->dos)
 		ft_free_ex(path);
 	if (rd->line[path->ret - 1] != '\n')

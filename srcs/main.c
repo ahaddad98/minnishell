@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 14:58:29 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:46:19 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			prompt(t_path *path, t_read *rd, t_shell *sh, t_list_cmd *lst)
 		ft_bzero(rd->line, sizeof(char) * BUFFER_SIZE);
 		path->ret = read(0, rd->line, BUFFER_SIZE);
 		ctrl_d(rd, path);
+		g_var_glob1 = 3;
 		if (rd->line[0] != '\n')
 		{
 			sh_initial(lst, sh);
@@ -100,5 +101,6 @@ int				main(int argc, char **argv, char **env)
 	init(&path);
 	get_signals();
 	path.env->fullenv = ft_strdup_2d(env);
+	rd.line = NULL;
 	prompt(&path, &rd, &sh, &lst);
 }

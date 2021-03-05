@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 15:07:28 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:44:32 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
+void			sigint_handler(int sig);
+void			get_signals(void);
 void		if_exit_red(t_all *all, t_path *path);
 void			ctrl_d(t_read *rd, t_path *path);
 void			ft_free_ex(t_path *path);
