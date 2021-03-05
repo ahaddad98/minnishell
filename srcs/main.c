@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 18:46:19 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/05 19:56:23 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 		if (g_var_glob1 == 1)
 		{
 			path->dol_sign = 1;
+			ft_free_arr((void **)&rd->line);
 			g_var_glob1 = 0;
 		}
 		if (g_var_glob1 == 2)
@@ -75,7 +76,7 @@ void			prompt(t_path *path, t_read *rd, t_shell *sh, t_list_cmd *lst)
 		rd->line = malloc(sizeof(char) * BUFFER_SIZE);
 		ft_bzero(rd->line, sizeof(char) * BUFFER_SIZE);
 		path->ret = read(0, rd->line, BUFFER_SIZE);
-		ctrl_d(rd, path);
+		ctrl_d(rd, path,g_var_glob1);
 		g_var_glob1 = 3;
 		if (rd->line[0] != '\n')
 		{
