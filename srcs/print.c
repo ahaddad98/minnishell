@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:02:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 15:26:21 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:21:54 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void print_all(t_list_cmd *lst)
 
   while (lst != NULL)
   {
+    		puts(lst->cmd);
     if (lst->pipe)
     {
       while (lst->pipe)

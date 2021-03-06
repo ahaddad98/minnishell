@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 19:32:06 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 09:49:29 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,8 +343,8 @@ int serach_dolar(char *line);
 char *no_antislach(char *str);
 char *slach(char *s);
 int check_n(char *str);
+char *befor(char **cmd, char *tmp);
 int ft_strlen_to_char(char *str);
-char *befor(char **cmd);
 char witch_red(char *s);
 int dbl_quote_norm(const char *line, int i);
 int len_each(const char *s, int i);

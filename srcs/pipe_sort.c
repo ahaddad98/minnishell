@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:56:50 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/03 07:32:44 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/05 17:55:22 by sqatim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void part_one(t_list_cmd *lst, t_shell *sh, t_path *path)
       string = is_befor_redirection(lst->pipe->str_pipe, sh);
       red = is_after_redirection(lst->pipe->str_pipe, sh);
       lst = pars_p_r(lst, string, red, path);
+      ft_stringdel(&string);
+      ft_stringdel(&red);
     }
     else
       lst = pars_pipe(lst, sh, path);

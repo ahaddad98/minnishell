@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:48:06 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 19:09:28 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 16:17:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void free_str_dol(t_dolar *dol)
 void ft_stringdel(char **string)
 {
     if (*string)
+    {
         free(*string);
-    *string = NULL;
+        *string = NULL;
+    }
 }
 
 void free_1d(char *p)
@@ -55,8 +57,11 @@ void free_2d_char(char ***array, int len)
         return;
     while (i < len)
     {
-        free((*array)[i]);
-        (*array)[i] = NULL;
+        if ((*array)[i])
+        {
+            free((*array)[i]);
+            (*array)[i] = NULL;
+        }
         i++;
     }
     free(*array);

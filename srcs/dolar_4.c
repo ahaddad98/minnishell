@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:23:02 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 18:23:40 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 20:47:46 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ t_tmp *_norm_case_007(t_dolar *dol, char *s, char *tmp, t_path *path)
         dol->res_tmp = creat_tmp(tmp3);
     }
     ft_stringdel(&tmp2);
-    // ft_stringdel(&tmp3);
     ft_stringdel(&tmp);
     return (dol->res_tmp);
 }

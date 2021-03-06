@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_space.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 09:27:51 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 09:43:32 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/04 18:40:27 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

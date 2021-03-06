@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolars_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 10:26:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 16:42:22 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 20:50:12 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int ft_isalpha2(int c)
 
 int is_valid(char c)
 {
-    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_')
+    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || 
+    (c >= 'a' && c <= 'z') || c == '_')
         return (1);
     return (0);
 }
@@ -53,7 +54,8 @@ int in_dollar(char *s, int i)
     {
         if (s[i] == '$' && s[i])
         {
-            while ((s[i] == '$' || ft_isalpha2(s[i]) || ft_isdigit(s[i])) && s[i])
+            while ((s[i] == '$' || ft_isalpha2(s[i]) || ft_isdigit(s[i])) 
+            && s[i])
             {
                 j++;
                 i++;

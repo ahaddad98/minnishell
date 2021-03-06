@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 08:59:45 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/03/03 18:52:19 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:27:22 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void free_all_node(t_all **all)
 {
     t_redirection *red;
+
     if ((*all)->command != NULL)
     {
         free((*all)->command);
@@ -25,24 +26,23 @@ void free_all_node(t_all **all)
         free((*all)->argument);
         (*all)->argument = NULL;
     }
-    // if ((*all)->red != NULL)
-    // {
-    //     // if ((*all)->red == NULL)
-    //         // puts("shi kharya");
-    //     while ((*all)->red)
-    //     {
-    //         // puts("hamza l kelb");
-    //         red = (*all)->red->next;
-    //         free((*all)->red->file_name);
-    //         (*all)->red->file_name = NULL;
-    //         free((*all)->red->sign);
-    //         (*all)->red->sign = NULL;
-    //         (*all)->red = red;
-    //     }
-        // free((*all)->red);
-    // }
     free(*all);
     *all = NULL;
+}
+void free_red(t_redirection **red)
+{
+    if ((*red)->sign != NULL)
+    {
+        free((*red)->sign);
+        (*red)->sign = NULL;
+    }
+    if ((*red)->file_name != NULL)
+    {
+        free((*red)->file_name);
+        (*red)->file_name = NULL;
+    }
+    free(*red);
+    *red = NULL;
 }
 
 void free_pipe(t_pipe *pipe)
@@ -61,22 +61,48 @@ void free_lst(t_list_cmd *lst)
 {
     t_list_cmd *tmp;
     t_all *all;
-
+    t_redirection *red;
+    t_pipe *p;
     while (lst)
     {
         tmp = lst->next;
         if (lst->pipe)
-            free_pipe(lst->pipe);
+        {
+            while (lst->pipe)
+            {
+                p = lst->pipe->next;
+                if (lst->pipe->all->red)
+                {
+                    while (lst->pipe->all->red)
+                    {
+                        red = lst->pipe->all->red->next;
+                        free_red(&lst->pipe->all->red);
+                        lst->pipe->all->red = red;
+                    }
+                }
+                free_pipe(lst->pipe);
+                lst->pipe = p;
+            }
+        }
         if (lst->all)
         {
             while (lst->all)
             {
-                // puts("zainab bagra");
                 all = lst->all->next;
+                if (lst->all->red)
+                {
+                    while (lst->all->red)
+                    {
+                        red = lst->all->red->next;
+                        free_red(&lst->all->red);
+                        lst->all->red = red;
+                    }
+                }
                 free_all_node(&lst->all);
                 lst->all = all;
             }
         }
+        ft_stringdel(&lst->cmd);
         free(lst);
         lst = tmp;
     }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_creat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:05:19 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/03 18:48:12 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:24:08 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_all *s_cmd_details(char *s1, char *s2, char *s3)
   all = malloc(sizeof(t_all));
   all->command = s1;
   all->argument = s2;
-  all->redirection = s3;
+  all->redirection =s3;
   all->red = NULL;
   all->next = NULL;
   return (all);
@@ -30,7 +30,7 @@ t_list_cmd *creat_node(char *content)
   t_list_cmd *lst;
 
   lst = malloc(sizeof(t_list_cmd));
-  lst->cmd = content;
+  lst->cmd = ft_strtrim(content, "\n");
   lst->pipe = NULL;
   lst->all = NULL;
   lst->next = NULL;
@@ -40,6 +40,7 @@ t_list_cmd *creat_node(char *content)
 t_redirection *creat_node_r(char *content, char *content1)
 {
   t_redirection *red;
+  char *tmp;
   red = malloc(sizeof(t_redirection));
   red->sign = ft_strtrim(content, "\n");
   red->file_name = ft_strtrim(content1, "\n");

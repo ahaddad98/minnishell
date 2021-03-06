@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   comand_details.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:00:25 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 09:59:04 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:21:39 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	comand_details(t_list_cmd *lst, t_shell *sh, t_path *path)
 	lstt = lst;
 	while (lst != NULL)
 	{
+		// puts(lst->cmd);
 		if (pipe_e(lst->cmd, sh) == 1)
 			part_one(lst, sh, path);
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spl_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:15:47 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/03 19:03:32 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 16:38:34 by sqatim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ t_list_cmd *define_each(t_list_cmd *lst, t_shell *sh, t_path *path)
     if (search(lst->cmd) == 1)
     {
         string = is_befor_redirection(lst->cmd, sh);
+ 
+        // puts(string);
         red = is_after_redirection(lst->cmd, sh);
         lst = parsing_red(lst, string, red, path);
-        free(string);
+        ft_stringdel(&string);
+        ft_stringdel(&red);
     }
     else
         lst = spl_cmd(lst, sh, path);
@@ -75,7 +78,7 @@ t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red,
     else
     {
         tmp = shell_space_split(string);
-        use.cmd = tmp[0];
+        use.cmd = ft_strdup(tmp[0]);
         use.arg = concat(tmp, 1);
     }
     tmp1 = s_cmd_details((use.cmd), (use.arg), red);
@@ -84,5 +87,6 @@ t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red,
     if (tmp)
         free_2d_char(&(tmp), count_line(tmp));
     free(use.arg);
+    free(use.cmd);
     return (lst);
 }

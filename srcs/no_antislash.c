@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_antislash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 11:17:48 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 13:00:05 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 08:26:19 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,65 @@ int alloc_slach(char *s, int i)
     return (j);
 }
 
+char *slash_norm001(char *str, t_use *use, char *tmp)
+{
+    use->j = 0;
+    use->u = spl_quote(str, use->i + 1) + 1;
+    if (!(use->str1 = malloc(sizeof(char) * (use->u + 1))))
+        return (NULL);
+    while (use->i < use->u && str[use->i])
+        use->str1[use->j++] = str[use->i++];
+    use->str1[use->j] = '\0';
+    return (use->str1);
+}
+char *slach_norm02(char *str, t_use *use, char *tmp)
+{
+    use->i++;
+    use->u = (use->w - 1) / 2;
+    if (!(use->s1 = malloc(sizeof(char) * (use->u + 1))))
+        return (NULL);
+    use->i = use->i + use->u;
+    if (use->u != 0)
+    {
+        while (str[use->i] == '\\' && str[use->i])
+            use->s1[use->k++] = str[use->i++];
+        use->s1[use->k] = '\0';
+    }
+    return (use->s1);
+}
+char *slach_norm03(char *str, t_use *use, char *tmp)
+{
+    use->u = (use->w) / 2;
+    if (!(use->s1 = malloc(sizeof(char) * (use->u + 1))))
+        return (NULL);
+    use->i = use->i + use->u;
+    while (str[use->i] == '\\' && str[use->i])
+        use->s1[use->k++] = str[use->i++];
+    use->s1[use->k] = '\0';
+    return (use->s1);
+}
+char *slach_norm04(char *str, t_use *use, char *tmp)
+{
+    use->j = 0;
+    if (!(use->str1 = malloc(sizeof(char) * (alloc_slach(str, use->i) + 1))))
+        return (NULL);
+    while (str[use->i] != '\\' && str[use->i])
+        use->str1[use->j++] = str[use->i++];
+    use->str1[use->j] = '\0';
+    return (use->str1);
+}
+char *slach_norm002(char *str, t_use *use, char *tmp)
+{
+    use->k = 0;
+    use->w = count_slash(str, use->i);
+    if (use->w % 2 != 0)
+        use->s1 = slach_norm02(str, use, tmp);
+    else if (use->w % 2 == 0)
+        use->s1 = slach_norm03(str, use, tmp);
+    tmp = join_dolar(tmp, use->s1);
+    return(tmp);
+}
+
 char *no_antislach(char *string)
 {
     char *str;
@@ -95,67 +154,20 @@ char *no_antislach(char *string)
     t_use use;
 
     ft_bzero(&use, sizeof(t_use));
-
     str = ft_strdup(string);
     if (!(tmp = malloc(sizeof(char) * (ft_strlen(str) + 1))))
         return (NULL);
-    use.i = 0;
     while (str[use.i] != '\0')
     {
-        use.u = 0;
-        use.w = 0;
-        use.j = 0;
-        use.k = 0;
         if (str[use.i] == '\"')
             tmp = _no_slash_norm(str, &use, tmp);
         if (str[use.i] == '\'')
-        {
-            use.j = 0;
-            use.u = spl_quote(str, use.i + 1) + 1;
-            if (!(use.str1 = malloc(sizeof(char) * (use.u + 1))))
-                return (NULL);
-            while (use.i < use.u && str[use.i])
-                use.str1[use.j++] = str[use.i++];
-            use.str1[use.j] = '\0';
-        }
+            tmp = slash_norm001(str, &use, tmp);
         if (str[use.i] == '\\')
-        {
-            use.k = 0;
-            use.w = count_slash(str, use.i);
-            if (use.w % 2 != 0)
-            {
-                use.i++;
-                use.u = (use.w - 1) / 2;
-                if (!(use.s1 = malloc(sizeof(char) * (use.u + 1))))
-                    return (NULL);
-                use.i = use.i + use.u;
-                if (use.u != 0)
-                {
-                    while (str[use.i] == '\\' && str[use.i])
-                        use.s1[use.k++] = str[use.i++];
-                    use.s1[use.k] = '\0';
-                }
-            }
-            else if (use.w % 2 == 0)
-            {
-                use.u = (use.w) / 2;
-                if (!(use.s1 = malloc(sizeof(char) * (use.u + 1))))
-                    return (NULL);
-                use.i = use.i + use.u;
-                while (str[use.i] == '\\' && str[use.i])
-                    use.s1[use.k++] = str[use.i++];
-                use.s1[use.k] = '\0';
-            }
-            tmp = join_dolar(tmp, use.s1);
-        }
+            tmp = slach_norm002(str, &use, tmp);
         else
         {
-            use.j = 0;
-            if (!(use.str1 = malloc(sizeof(char) * (alloc_slach(str,use.i) + 1))))
-                return (NULL);
-            while (str[use.i] != '\\' && str[use.i])
-                use.str1[use.j++] = str[use.i++];
-            use.str1[use.j] = '\0';
+            use.str1 = slach_norm04(str, &use, tmp);
             tmp = join_dolar(tmp, use.str1);
         }
     }

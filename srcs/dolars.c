@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 17:50:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 17:03:03 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:05:51 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_tmp *_dolar_last(char *s, t_path *path, t_dolar *dol)
     while (s[dol->i])
     {
         if (_condition_norm(s, dol->i) == 1)
-                dol->res_tmp = case_00(dol, path, s);
+            dol->res_tmp = case_00(dol, path, s);
         else if (s[dol->i] == '$' && s[dol->i + 1] != '\\')
         {
             dol->res_tmp = _dolar_norm(s, path, dol);
@@ -86,7 +86,7 @@ t_tmp *_dolar_last(char *s, t_path *path, t_dolar *dol)
             dol->i++;
         add_tmp(&(dol->head), dol->res_tmp);
     }
-        return (dol->head);
+    return (dol->head);
 }
 
 char *dolar(char *str, t_path *path)
@@ -100,6 +100,7 @@ char *dolar(char *str, t_path *path)
     ft_bzero(&dol, sizeof(t_dolar));
     dol.head = _dolar_last(s, path, &dol);
     tmp = dol.head;
+    result = NULL;
     while (dol.head != NULL)
     {
         result = join_dolar(result, dol.head->s1);
@@ -108,6 +109,6 @@ char *dolar(char *str, t_path *path)
     dol.head = tmp;
     free_dolar(&(dol.head));
     ft_stringdel(&s);
-    // free_str_dol(&dol);
+    free_str_dol(&dol);
     return (result);
 }

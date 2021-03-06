@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/05 19:53:43 by ahaddad           #+#    #+#              #
-#    Updated: 2021/03/05 19:53:46 by ahaddad          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME= minishell
 SRC_PATH= srcs
 HDR_PATH= includes
@@ -85,7 +73,6 @@ SRC_NAME=init.c\
 		norm_antislach.c\
 		print.c\
 
-
 HDR_NAME=minishell.h 
 
 OBJ_NAME= $(SRC_NAME:.c=.o)
@@ -95,24 +82,32 @@ SRC= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 HDR= $(addprefix $(HDR_PATH)/,$(HDR_NAME))
 
 LIB= libft.a
-FLAGS= 
+# FLAGS= -Wall -Wextra -Werror
 LLIB_FLAG= -L$(LIB_PATH) libft/libft.a
 H_FLAG= -I $(HDR_PATH)
 
-COMP= gcc 
+COMP= gcc
 
 all: lib  $(NAME) 
 
 $(NAME) : $(LIB_PATH)/$(LIB) $(OBJ)
-	@rm -rf miniRT
-	@$(COMP) $(H_FLAG) $(LLIB_FLAG) $(OBJ) -o $@
+	@rm -rf minishell
+	@$(COMP) -g $(H_FLAG) $(OBJ) $(LLIB_FLAG) -o $@
+	@echo " Made by : \033[1;91mAhaddad && Zdnaya\033[m"
+	@echo "	███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
+	@echo "	████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
+	@echo "	██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
+	@echo "	██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
+	@echo "	██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
+	@echo "	╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"                                             
+	@echo 	"\n\033[32m ------- Minishell has been created successfully -------\033[0m\n"
 
 lib:
 	@make -sC $(LIB_PATH)
 
 $(OBJ_PATH)/%.o:  $(SRC_PATH)/%.c $(HDR)
 	@mkdir -p $(OBJ_PATH) 
-	@$(COMP) $(FLAGS) $(H_FLAG)  -o $@ -c $<
+	@$(COMP) -g $(FLAGS) $(H_FLAG) -g -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ_PATH)

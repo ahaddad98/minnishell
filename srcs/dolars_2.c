@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolars_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 12:24:29 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 18:51:40 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 17:43:49 by sqatim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_tmp *_case_01(t_dolar *dol, char *s, char *tmp1, t_path *path)
     char *tmp;
     if ((ft_isalpha2(s[dol->i]) == 1 || ft_isdigit(s[dol->i]) == 1 || s[dol->i] == '_') && s[dol->i])
     {
-        // puts("1");
         while ((ft_isalpha2(s[dol->i]) == 1 || ft_isdigit(s[dol->i]) == 1 || s[dol->i] == '_') && s[dol->i])
             tmp1[dol->k++] = s[dol->i++];
         tmp1[dol->k] = '\0';
@@ -44,7 +43,6 @@ t_tmp *_case_01(t_dolar *dol, char *s, char *tmp1, t_path *path)
     }
     else
     {
-        // puts("2");
         tmp1 = NULL;
         dol->var_tmp = join_dolar(dol->s1, NULL);
         dol->c1 = creat_tmp(dol->var_tmp);

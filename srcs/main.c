@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 19:56:23 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:28:09 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 		if (g_var_glob1 == 0)
 			g_var_glob1 = 3;
 		lst = handle_line(rd, lst, path);
+		// print_all(lst);
 		if (check_one(rd->line) == 1)
 			pipes_cmd1(path, lst, sh);
 		else if (check_one(rd->line) == 3)

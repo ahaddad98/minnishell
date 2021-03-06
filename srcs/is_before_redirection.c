@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_before_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 17:19:38 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 15:26:29 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 20:30:33 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,15 @@ char *is_befor_redirection(char *line, t_shell *sh)
 {
   char *tmp;
   char **cmd;
+  char *res;
+  char *s;
+  int k = 0;
 
+  res = malloc(sizeof(char)* (ft_strlen(line)));
   cmd = shell_space_split(line);
-  tmp = befor(cmd);
-  if (!tmp)
-    return (NULL);
-  else
-    tmp = ft_strtrim(tmp, "\n");
-  if (cmd)
-    free_2d_char(&(cmd), count_line(cmd));
+  s = befor(cmd, res);
+  tmp = ft_strdup(s);
+  ft_stringdel(&s);
+  ft_stringdel(&res);
   return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:30:44 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 10:01:36 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 15:14:41 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char	*concat_space(char *tmp, char *tmp1)
 		result = ft_strdup(tmp1);
 	else
 	{
-		result = malloc(sizeof(char) * (ft_strlen(tmp) + ft_strlen(tmp1) + 1));
 		result = ft_str_join(tmp1, " ", tmp);
 	}
 	return ((result));

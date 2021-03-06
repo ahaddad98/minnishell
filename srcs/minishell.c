@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:30:13 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/02/28 09:23:32 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:24:33 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void		call_pipe(t_list_cmd *lst, t_path *path, t_shell *sh)
 	while (lst != NULL)
 	{
 		if (pipe_e(lst->cmd, sh) == 1)
+		{
 			pipes_cmd(path, lst, sh);
+		}	
 		else
-			call_getprg(lst, path, sh);
+			{
+				call_getprg(lst, path, sh);
+			}
 		lst = lst->next;
 	}
 	lst = list1;

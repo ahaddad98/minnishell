@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_modify.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:18:59 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/03 18:54:41 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:20:07 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,4 @@ t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh)
   lst = list1;
   return (lst);
 }
+//ls >p ; ls | dw

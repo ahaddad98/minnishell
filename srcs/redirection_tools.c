@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:44:55 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/03 19:00:59 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/05 16:52:42 by sqatim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,26 @@ int kayna2(char *str)
 }
 char *replace(char *tmp, char *s2)
 {
+    char *s;
+
     if (!tmp && !s2)
-        return (NULL);
-    if (tmp == NULL)
     {
-        // puts("1");
-        tmp = ft_strdup(s2);
+        return (NULL);
+    
+    }if (tmp == NULL)
+    {
+        return(ft_strdup(s2));
     }
     else
     {
-        // puts("2");
+        s = tmp;
         tmp = concat_space(s2, tmp);
+        // ft_stringdel(&s);
+        if(s)
+            {
+                free(s);
+                s = NULL;
+            }
     }
     return (tmp);
 }
