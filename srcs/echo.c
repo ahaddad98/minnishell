@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:02:30 by zjamali           #+#    #+#             */
-/*   Updated: 2021/03/06 10:05:11 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:46:53 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char *conver_free(char **spl, int i, t_path *path)
 
 	tmp = spl[i];
 	spl[i] = replace_01(spl[i], path);
-	ft_stringdel(&tmp);
-	tmp = spl[i];
-	spl[i] = no_quote(spl[i]);
-	ft_stringdel(&tmp);
-	tmp = spl[i];
+	// ft_stringdel(&tmp);
+	// tmp = spl[i];
 	spl[i] = slach((spl[i]));
+	// ft_stringdel(&tmp);
+	// tmp = spl[i];
+	spl[i] = no_quote(spl[i]);
 	ft_stringdel(&tmp);
 	return (spl[i]);
 }
@@ -77,4 +77,5 @@ void ft_echo(char *str, int option, t_path *path)
 	if (option != 0)
 		write(1, "\n", 2);
 	path->dol_sign = 0;
+	ft_free_2dem_arr((void ***)&spl);
 }

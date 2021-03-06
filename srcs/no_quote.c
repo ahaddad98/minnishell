@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:56:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/01 18:37:54 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 10:45:24 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char *noo_quote(char *s)
     char a;
     char *c;
     char *result;
+    char *res;
     char *str;
     i = 0;
     j = 0;
@@ -99,8 +100,9 @@ char *noo_quote(char *s)
     }
     result[j] = '\0';
     ft_stringdel(&str);
-    result = ft_strtrim(result, "\n");
-    return (result);
+    res = ft_strtrim(result, "\n");
+    ft_stringdel(&result);
+    return (res);
 }
 
 char *no_quote(char *s)
