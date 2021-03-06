@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:04:15 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 17:40:47 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 11:50:11 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void				exe(char *p1, char *cmd, char **tmp1, t_path *path)
 
 	status = 0;
 	a = fork();
+	if (a < 0)
+	{
+		exit (1);
+	}
 	if (!a)
 	{
 		if (p1 && cmd[0] != '\n' && tmp1[0])

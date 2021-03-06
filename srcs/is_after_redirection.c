@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_after_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:41:55 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 17:49:14 by sqatim           ###   ########.fr       */
+/*   Updated: 2021/03/06 12:43:47 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,13 @@ int condition_if(char **line, t_use use)
 
 char *norm_first(char **line, t_use *use, char *tmp)
 {
-  char *tmp1;
 
   if (use->i == 0 && search_2(line[use->i]) == 0)
     use->i++;
   else if (condition_1(line, use->i) == 1 && line[use->i + 1])
   {
-    // tmp1 = tmp;
     tmp = replace(tmp, line[use->i]);
-    // ft_stringdel(&tmp1);
-    // tmp1 = tmp;
     tmp = replace(tmp, line[use->i + 1]);
-    // ft_stringdel(&tmp1);
     use->i = use->i + 2;
   }
   else if (use->i >= 1 && kayna2(line[use->i - 1]) == 0 && search_2(line[use->i]) == 0 && count(line[use->i - 1]) == 0)
@@ -158,22 +153,17 @@ char *is_after_redirection(char *s, t_shell *sh)
   tmp = NULL;
   line = shell_space_split(s);
   ft_bzero(&use, sizeof(t_use));
-
   tmp = malloc(sizeof(char) * (ft_strlen(s)));
+  ft_bzero(tmp,sizeof(char) * (ft_strlen(s)));
   while (line[use.i])
   {
-    // one = tmp;
     if (condition_if(line, use) == 1)
     {
-      // one = tmp;
       tmp = norm_first(line, &use, tmp);
-      // ft_stringdel(&one);
     }
     else
     {
-      // one = tmp;
       tmp = last_norm(line, &use, tmp, tmp2);
-      // ft_stringdel(&one);
     }
   }
   free_2d_char(&(line), count_line(line));

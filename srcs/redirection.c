@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:34:31 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 20:32:55 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/06 12:37:23 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_list_cmd *redirection_sort(t_list_cmd *lst, t_use *use, char *free_sp)
 
   while (free_sp[use->i])
   {
-    tmp = malloc(sizeof(char) * ft_strlen_to_char(&free_sp[use->i]));
+    tmp = malloc(sizeof(char) * (ft_strlen_to_char(&free_sp[use->i]) + 1));
     if ((free_sp[use->i] == '>' && free_sp[use->i + 1] == '>') || (free_sp[use->i] == '>' || free_sp[use->i] == '<'))
     {
       use->sign = pars_red_norm(lst, free_sp, use);

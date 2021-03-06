@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spl_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:15:47 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 16:38:34 by sqatim           ###   ########.fr       */
+/*   Updated: 2021/03/06 11:47:39 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ t_list_cmd *define_each(t_list_cmd *lst, t_shell *sh, t_path *path)
     char *string;
     char *red;
 
+    // ft_putnbr_fd(search(lst->cmd),1);
     if (search(lst->cmd) == 1)
     {
         string = is_befor_redirection(lst->cmd, sh);
- 
-        // puts(string);
-        red = is_after_redirection(lst->cmd, sh);
+         red = is_after_redirection(lst->cmd, sh);
         lst = parsing_red(lst, string, red, path);
         ft_stringdel(&string);
         ft_stringdel(&red);

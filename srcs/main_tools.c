@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:55:38 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 19:40:17 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:01:13 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char			**ft_strdup_2d(char **str)
 
 	i = 0;
 	len = count_line(str);
-	ret = malloc(sizeof(char *) * len + 1);
+	ret = malloc(sizeof(char *) * (len + 1));
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:56:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 17:29:32 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 11:52:57 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int		cd_cmd_ext(char *nextpath, t_path *path)
 	return (0);
 }
 
-void			mise_a_jour_env(t_path *path)
+void			update_env(t_path *path)
 {
 	int				i;
 	char			**spl;
@@ -76,7 +76,7 @@ void			cd_cmd(char *nextpath, t_path *path)
 {
 	if (cd_cmd_ext(nextpath, path) == 1)
 	{
-		mise_a_jour_env(path);
+		update_env(path);
 		return;
 	}
 	else if (chdir(nextpath) < 0)
@@ -87,5 +87,5 @@ void			cd_cmd(char *nextpath, t_path *path)
 	}
 	else
 		path->dol_sign = 0;
-	mise_a_jour_env(path);
+	update_env(path);
 }

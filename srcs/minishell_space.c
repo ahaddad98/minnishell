@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_space.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 09:27:51 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 18:40:27 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 12:08:12 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 int norm_ligne2(const char *s, int i)
 {
-    if (s[i] == '\"')
+    if (s[i])
     {
-        i = dbl_quote(s, i + 1);
-        return (i);
+        // puts(&s[i]);
+        if (s[i] == '\"')
+        {
+            i = dbl_quote(s, i + 1);
+            return (i + 1);
+        }
+        if (s[i] == '\'')
+        {
+            i = spl_quote(s, i + 1);
+            return (i + 1);
+        }
+        else
+            return (i);
     }
-    if (s[i] == '\'')
-    {
-        i = spl_quote(s, i + 1);
-        return (i);
-    }
-    else
-        return (i);
+    return (i);
 }
 
 int norm_ligne(const char *s, int i)
@@ -51,8 +56,11 @@ int norm_ligne(const char *s, int i)
                 i++;
         }
         else
+        {
             i = norm_ligne2(s, i);
-        i++;
+            if (s[i])
+                i++;
+        }
     }
     return (i);
 }
@@ -63,6 +71,8 @@ int ligne(const char *s)
 
     i = 0;
     j = 0;
+    if (!s)
+        return (0);
     while (s[i])
     {
         while (s[i] && (s[i] == ' ' || s[i] == '\t'))
@@ -70,7 +80,9 @@ int ligne(const char *s)
         while (s[i] && s[i] != ' ' && s[i] != '\t' && s[i] != '\"' && s[i] != '\'' && s[i] != '\\')
             i++;
         if (s[i] && (s[i] == '\'' || s[i] == '\"' || s[i] == '\\'))
-            i = norm_ligne(s, i) + 1;
+        {
+            i = norm_ligne(s, i );
+        }
         while (s[i] && s[i] != ' ' && s[i] != '\t' && s[i] != '\"' && s[i] != '\'' && s[i] != '\\')
             i++;
         while ((s[i] == ' ' || s[i] == '\t') && s[i])

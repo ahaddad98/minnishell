@@ -6,15 +6,15 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:37:04 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 17:07:10 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:31:30 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int			is_alpha(char *str)
+int is_alpha(char *str)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -26,7 +26,7 @@ int			is_alpha(char *str)
 	return (1);
 }
 
-void		ft_builtin2(t_all *all, t_path *path)
+void ft_builtin2(t_all *all, t_path *path)
 {
 	if (ft_strcmp(all->command, "exit") == 0)
 		ft_exit(all);
@@ -48,7 +48,7 @@ void		ft_builtin2(t_all *all, t_path *path)
 	}
 }
 
-void		ft_builtin1(t_all *all, t_path *path, t_shell *sh)
+void ft_builtin1(t_all *all, t_path *path, t_shell *sh)
 {
 	if (ft_strcmp(all->command, "pwd") == 0)
 		print_working_directory(path);
@@ -73,16 +73,24 @@ void		ft_builtin1(t_all *all, t_path *path, t_shell *sh)
 		ft_builtin2(all, path);
 }
 
-void		ft_execute1(t_all *all, t_path *path, t_shell *sh)
+void ft_execute1(t_all *all, t_path *path, t_shell *sh)
 {
-	int		len;
-	char	**tmp;
+	int len;
+	char **tmp;
+	char *tmp1;
 
 	len = 0;
+	tmp1 = all->command;
 	all->command = replace_01(all->command, path);
-	all->command = no_quote(slach(all->command));
+	ft_stringdel(&tmp1);
+	tmp1 = all->command;
+	all->command = slach(all->command);
+	ft_stringdel(&tmp1);
+	tmp1 = all->command;
+	all->command = no_quote(all->command);
+	ft_stringdel(&tmp1);
 	if (!((tmp = shell_space_split(all->command))))
-		return ;
+		return;
 	if (count_line(tmp) == 1 && is_alpha(all->command))
 		ft_builtin1(all, path, sh);
 	else if (count_line(tmp) > 1 || !is_alpha(all->command))

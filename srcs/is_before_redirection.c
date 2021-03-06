@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_before_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 17:19:38 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 20:30:33 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/06 11:09:48 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

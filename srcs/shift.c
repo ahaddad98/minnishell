@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:28:12 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/05 15:07:58 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 11:50:47 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 			check_dup(path, sh, all, path->index);
 		}
 		exit(0);
+	}
+	else if (path->pid < 0)
+	{
+		exit(1);
 	}
 	wait(0);
 }

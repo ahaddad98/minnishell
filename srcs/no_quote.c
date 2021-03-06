@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:56:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 10:45:24 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:20:52 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char *no_quote(char *s)
     if (witch_quote(s) != '\0')
         return (noo_quote(s));
     else
-        return (s);
+        return (ft_strdup(s));
 }
 
 

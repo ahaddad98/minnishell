@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:02:30 by zjamali           #+#    #+#             */
-/*   Updated: 2021/03/06 10:46:53 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:32:01 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ char *conver_free(char **spl, int i, t_path *path)
 
 	tmp = spl[i];
 	spl[i] = replace_01(spl[i], path);
-	// ft_stringdel(&tmp);
-	// tmp = spl[i];
+	ft_stringdel(&tmp);
+	tmp = spl[i];
 	spl[i] = slach((spl[i]));
-	// ft_stringdel(&tmp);
-	// tmp = spl[i];
+	ft_stringdel(&tmp);
+	tmp = spl[i];
 	spl[i] = no_quote(spl[i]);
 	ft_stringdel(&tmp);
 	return (spl[i]);
@@ -60,6 +60,7 @@ void ft_echo(char *str, int option, t_path *path)
 		if (check_n(spl[i]) == 0)
 		{
 			j = i;
+
 			break;
 		}
 		else if (check_n(spl[i]) == 1)
@@ -70,7 +71,7 @@ void ft_echo(char *str, int option, t_path *path)
 		if (i != j)
 			spl[i] = conver_free(spl, i, path);
 		ft_putstr_fd(spl[i], 1);
-		if (spl[i])
+		if (spl[i + 1])
 			ft_putstr_fd(" ", 1);
 		i++;
 	}

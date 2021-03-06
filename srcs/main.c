@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 10:28:09 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:36:19 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,3 +106,4 @@ int				main(int argc, char **argv, char **env)
 	rd.line = NULL;
 	prompt(&path, &rd, &sh, &lst);
 }
+//echo $a$PWD$?$

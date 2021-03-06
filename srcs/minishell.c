@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:30:13 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 10:24:33 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 11:05:56 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void		call_getprg(t_list_cmd *lst, t_path *path, t_shell *sh)
 		while (lst->all != NULL)
 		{
 			if (search(lst->cmd) && lst->all->red->file_name)
-				shift_extra(path, lst->all, sh);
+				{
+					// lst->all->red->file_name = no_quote(lst->all->red->file_name);
+					shift_extra(path, lst->all, sh);
+				}
 			else if (search(lst->cmd) && !lst->all->red->file_name)
 				shift_extra(path, lst->all, sh);
 			else

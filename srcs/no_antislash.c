@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_antislash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 11:17:48 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 08:26:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/06 12:20:24 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char *slach(char *s)
     if (check_antislach(s) == 1)
         return (no_antislach(s));
     else
-        return (s);
+        return (ft_strdup(s));
 }
 
 int count_slash(char *s, int i)

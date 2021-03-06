@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   condition_check_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:40:52 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 10:17:41 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/06 12:36:09 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int		search_norm(char *str, int i, int k, int w)
 		else
 			i++;
 	}
-	if (str[i] == '\'' && (str[i - 1] != '\\' && k % 2 != 0))
+	if (str[i] == '\'' )
 		i = spl_quote(str, i + 1);
-	if (str[i] == '\"' && (str[i - 1] != '\\' && k % 2 != 0))
+	if (str[i] == '\"' )
 		i = dbl_quote(str, i + 1);
 	if (w == 1)
 		return (-1);
