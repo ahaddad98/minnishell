@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:56:11 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 11:52:57 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 14:27:14 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int		cd_cmd_ext(char *nextpath, t_path *path)
 {
 	char			*s;
 
+	s = NULL;
 	if (!nextpath || !ft_strcmp(nextpath, "~"))
 	{
 		nextpath = get_var_env(path, "$HOME");
@@ -63,7 +64,7 @@ void			update_env(t_path *path)
 				ft_free_arr((void **)&tmp);
 				ft_free_2dem_arr((void ***)&spl);
 
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -77,7 +78,7 @@ void			cd_cmd(char *nextpath, t_path *path)
 	if (cd_cmd_ext(nextpath, path) == 1)
 	{
 		update_env(path);
-		return;
+		return ;
 	}
 	else if (chdir(nextpath) < 0)
 	{

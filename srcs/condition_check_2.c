@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   condition_check_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:40:52 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 12:36:09 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 14:17:39 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,23 @@ int		search(char *str)
 			use.i++;
 	}
 	return (0);
+}
+int check_redirection(char *line)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == '>')
+			j = 1;
+		else if (line[i] == '<')
+			j = 2;
+		else if (line[i] == '>' && line[i + 1] == '>')
+			j = 3;
+		i++;
+	}
+	return (j);
 }

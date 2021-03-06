@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/03/06 14:51:19 by ahaddad           #+#    #+#              #
+#    Updated: 2021/03/06 14:51:54 by ahaddad          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME= minishell
 SRC_PATH= srcs
 HDR_PATH= includes
@@ -11,24 +23,20 @@ SRC_NAME=init.c\
 		shift_tools2.c\
 		env.c\
 		minishell.c\
-		read_line.c\
 		pwd.c\
 		execute.c\
 		tools.c\
-    	directory.c\
 		cd.c\
 		shift.c\
 		var_env.c\
 		export.c\
 		unset.c\
 		pipes.c\
-		read.c\
 		lanch.c\
 		parsing.c\
 		pipe.c\
 		echo.c\
 		condition_check_0.c\
-		condition_check_1.c\
 		condition_check_2.c\
 		is_after_redirection.c\
 		is_before_redirection.c\
@@ -44,8 +52,6 @@ SRC_NAME=init.c\
 		simple_cmd_pars.c\
 		pars_conditions.c\
 		concats.c\
-		pipe_sort.c\
-		comma_or_pipe_sort.c\
 		split_tools.c\
 		main.c\
 		exit.c\
@@ -65,9 +71,9 @@ SRC_NAME=init.c\
 		redirection.c\
 		dolars_1.c\
 		dolars_2.c\
-		 dolar_3.c\
-		 dolar_4.c\
-		 dolar_5.c\
+		dolar_3.c\
+		dolar_4.c\
+		dolar_5.c\
 		free_lst.c\
 		no_antislash.c\
 		norm_antislach.c\

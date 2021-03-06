@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:11:37 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 17:34:37 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 14:23:18 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ int			is_modif(char *args, int ch_mod, t_path *path)
 
 	i = 0;
 	spl = ft_split(args, '=');
+	s = NULL;
 	while (path->env->fullenv[i])
 	{
 		tmp = s;
 		s = get_bef_eq(path->env->fullenv[i]);
+		if(tmp)
 		ft_free_arr((void **)&tmp);
 		if (!ft_strcmp(s, spl[0]))
 		{
