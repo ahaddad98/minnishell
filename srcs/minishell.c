@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:30:13 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 15:08:36 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:06:17 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		call_getprg(t_list_cmd *lst, t_path *path, t_shell *sh)
 			else if (search(lst->cmd) && !lst->all->red->file_name)
 				shift_extra(path, lst->all, sh);
 			else
-				ft_execute1(lst->all, path, sh);
+				ft_execute1(lst->all, path);
 			lst->all = lst->all->next;
 		}
 		lst->all = tmp1;

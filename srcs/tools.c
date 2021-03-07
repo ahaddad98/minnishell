@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:57:49 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 11:00:39 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:47:59 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,35 @@ int				count_line(char **env)
 	return (i);
 }
 
-static void		*leak(char **spl, int j)
+void			show_env1(char **env)
 {
-	j = j - 1;
-	while (spl[j])
+	int		i;
+	int		index;
+	char	**spl;
+
+	if (!env)
+		return ;
+	i = 0;
+	index = 0;
+	while (env[i])
 	{
-		free(spl[j]);
-		j--;
+		spl = ft_split(env[i], '=');
+		sort1(env, spl, i, index);
+		ft_free_2dem_arr((void ***)&spl);
+		i++;
 	}
-	free(spl);
-	return (NULL);
+}
+
+int				is_slash(char *str)
+{
+	int				i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
 }

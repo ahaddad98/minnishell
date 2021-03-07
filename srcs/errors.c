@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int first_check_1(char *line, t_shell *sh)
+int first_check_1(char *line)
 {
   int i;
 
@@ -46,7 +46,7 @@ int first_check_1(char *line, t_shell *sh)
   return (0);
 }
 
-int first_check(char *line, t_shell *sh)
+int first_check(char *line)
 {
   int i;
 
@@ -85,7 +85,7 @@ int first_check(char *line, t_shell *sh)
   }
 }
 
-int second_check(char *line, t_shell *sh)
+int second_check(char *line)
 {
   int i;
 
@@ -106,21 +106,11 @@ int second_check(char *line, t_shell *sh)
       write(1, "Error:Syntax error\n", 20);
       return (1);
     }
-    // else if (line[i + 1] == ' ')
-    // {
-    //   while ((line[i++] == ' ' || line[i + 1] == '\t') && line[i])
-    //     i++;
-    //   if ((line[i + 1] == ';' || line[i + 1] == '|') && line[i])
-    //   {
-    //     write(1, "Error:Syntax error\n", 20);
-    //     return (1);
-    //   }
-    // }
   }
   return (0);
 }
 
-int check_0(char *line, t_shell *sh)
+int check_0(char *line)
 {
   int i;
 
@@ -210,7 +200,7 @@ int check_1(char *line)
   return (0);
 }
 
-int quote_nbr(char *line, t_shell *sh)
+int quote_nbr(char *line)
 {
   int i;
   int j;
@@ -285,13 +275,13 @@ int quote_nbr(char *line, t_shell *sh)
 void check_line_error(char *line, t_shell *sh)
 {
 
-  if (quote_nbr(line, sh) == 1 || first_check(line, sh) == 1 || first_check_1(line, sh) == 1 || second_check(line, sh) == 1)
+  if (quote_nbr(line) == 1 || first_check(line) == 1 || first_check_1(line) == 1 || second_check(line) == 1)
   {
     sh->error = 1;
   }
   if (sh->error == 0 && search(line) == 1)
   {
-    if (check_0(line, sh) == 1 || check_1(line) == 1)
+    if (check_0(line) == 1 || check_1(line) == 1)
       sh->error = 1;
   }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:18:20 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/28 09:17:36 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:08:24 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		exe_with_re1(t_shell *sh, t_list_cmd *lst, t_path *path)
 	else if (search(lst->cmd) && !lst->all->red->file_name)
 		shift_extra(path, lst->all, sh);
 	else
-		ft_execute1(lst->all, path, sh);
+		ft_execute1(lst->all, path);
 	exit(0);
 }
 
@@ -73,11 +73,10 @@ void		check_fd1(int fd[2], int fd1[2], int i, t_path *path)
 	}
 }
 
-int			pipe_now1(t_all *all, t_shell *sh, t_path *path, t_list_cmd *lst)
+int			pipe_now1(t_shell *sh, t_path *path, t_list_cmd *lst)
 {
 	int			fd[2];
 	int			fd1[2];
-	t_all		*all1;
 
 	while (lst->all)
 	{
@@ -111,7 +110,7 @@ void		pipes_cmd1(t_path *path, t_list_cmd *lst, t_shell *sh)
 	while (lst != NULL)
 	{
 		all = lst->all;
-		path->i = pipe_now1(all, sh, path, lst);
+		path->i = pipe_now1(sh, path, lst);
 		lst->all = all;
 		lst = lst->next;
 	}

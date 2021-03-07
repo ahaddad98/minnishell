@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:28:49 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 10:32:44 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:06:17 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int			lstsize(t_list_cmd *lst)
 {
 	t_pipe			*list1;
-	t_list_cmd		*lst1;
 	t_all			*all;
 	int				i;
 
@@ -50,7 +49,7 @@ void		exe_with_re(t_shell *sh, t_list_cmd *lst, t_path *path)
 	else if (search(lst->pipe->str_pipe) && !lst->all->red->file_name)
 		shift_extra(path, lst->pipe->all, sh);
 	else
-		ft_execute1(lst->pipe->all, path, sh);
+		ft_execute1(lst->pipe->all, path);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:23:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/04 10:21:27 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/07 09:50:47 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_tmp *norm_case04(t_dolar *dol, char *s, char *tmp)
 
 t_tmp *_norm_case004(t_dolar *dol, char *s, char *tmp)
 {
+
 	while (s[dol->i] == '\\' && s[dol->i])
 	{
 		tmp[dol->k++] = s[dol->i++];
@@ -47,11 +48,12 @@ t_tmp *_norm_case004(t_dolar *dol, char *s, char *tmp)
 	if (dol->w % 2 == 0)
 	{
 		if (s[dol->i] == '$')
-			dol->c1 = creat_tmp(tmp);
+		{	dol->c1 = creat_tmp(tmp);
+			// puts("laloli");
+		}
 		else
 		{
-			while ((s[dol->i] != '$' && s[dol->i] != '\"' && s[dol->i] != '\'')
-					&& s[dol->i])
+			while ((s[dol->i] != '$' && s[dol->i] != '\"' && s[dol->i] != '\'') && s[dol->i])
 				tmp[dol->k++] = s[dol->i++];
 			tmp[dol->k] = '\0';
 			dol->c1 = creat_tmp(tmp);
@@ -68,14 +70,15 @@ t_tmp *_norm_case004(t_dolar *dol, char *s, char *tmp)
 
 t_tmp *case_04(t_dolar *dol, char *s, char *tmp)
 {
+
 	dol->w = 0;
 	dol->k = 0;
 	if (s[dol->i] == '$' && s[dol->i + 1] == '\\')
 		tmp[dol->k++] = s[dol->i++];
 	if (s[dol->i] == '\\')
-		dol->c1 = _norm_case004(dol, s, tmp);
-	dol->c1 = norm_case04(dol, s, tmp);
-	return (dol->c1);
+		return(_norm_case004(dol, s, tmp));
+	// dol->c1 = norm_case04(dol, s, tmp);
+	return (norm_case04(dol, s, tmp));
 }
 
 t_tmp *case_05(t_dolar *dol, char *s, char *tmp)
@@ -89,8 +92,7 @@ t_tmp *case_05(t_dolar *dol, char *s, char *tmp)
 
 t_tmp *case_06(t_dolar *dol, char *s, char *tmp)
 {
-	while ((s[dol->i] != '$' || (s[dol->i] == '$' && s[dol->i + 1] == '\"')) 
-			&& s[dol->i])
+	while ((s[dol->i] != '$' || (s[dol->i] == '$' && s[dol->i + 1] == '\"')) && s[dol->i])
 		tmp[dol->k++] = s[dol->i++];
 	tmp[dol->k] = '\0';
 	dol->c1 = creat_tmp(tmp);

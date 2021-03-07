@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shift.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:28:12 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 15:06:20 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 12:36:36 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void		check_dup(t_path *path, t_shell *sh, t_all *all, int index)
+void		check_dup(t_path *path, t_all *all, int index)
 {
 	if (index == 1)
 	{
@@ -22,7 +22,7 @@ void		check_dup(t_path *path, t_shell *sh, t_all *all, int index)
 			exit(EXIT_FAILURE);
 		}
 		close(path->file_desc);
-		ft_execute1(all, path, sh);
+		ft_execute1(all, path);
 	}
 	else if (index == 2)
 	{
@@ -32,7 +32,7 @@ void		check_dup(t_path *path, t_shell *sh, t_all *all, int index)
 			exit(EXIT_FAILURE);
 		}
 		close(path->file_desc);
-		ft_execute1(all, path, sh);
+		ft_execute1(all, path);
 	}
 }
 
@@ -105,7 +105,7 @@ void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 			at_rd = get_antired(all);
 			get_multi_red(rd, at_rd, path);
 			red_dif(at_rd[count_line(at_rd) - 1], rd[count_line(rd) - 1]);
-			ft_execute1(all, path, sh);
+			ft_execute1(all, path);
 			ft_free_2dem_arr((void ***)&rd);
 			ft_free_2dem_arr((void ***)&at_rd);
 		}
@@ -113,7 +113,7 @@ void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 		{
 			get_multi_red2(all, path);
 			path->index = che_red_type(path, all, path->index);
-			check_dup(path, sh, all, path->index);
+			check_dup(path, all, path->index);
 		}
 		exit(0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:55:38 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 12:01:13 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:36:20 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			ft_free_ex(t_path *path)
 	exit(0);
 }
 
-void			ctrl_d(t_read *rd, t_path *path, int g_var)
+void			ctrl_d(t_read *rd, t_path *path)
 {
 	char			*tmp;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolars.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 17:50:18 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 10:05:51 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:56:39 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ t_tmp *_dolar_norm1(char *s, t_path *path, t_dolar *dol)
     return (_norm_case_007(dol, s, dol->tmp, path));
 }
 
-t_tmp *_dolar_norm2(char *s, t_path *path, t_dolar *dol)
+t_tmp *_dolar_norm2(char *s, t_dolar *dol)
 {
     dol->k = 0;
     dol->w = 0;
+
     if (!(dol->tmp = malloc(sizeof(char) * (until_dollar(s, dol->i) + 1))))
         return (NULL);
     if (s[dol->i] == '\'')
     {
         dol->res_tmp = case_03(dol, s, dol->tmp);
-        dol->i = 1;
+        puts(dol->res_tmp->s1);
+        dol->o = 1;
     }
     if ((s[dol->i] == '$' && s[dol->i + 1] == '\\') || s[dol->i] == '\\')
     {
@@ -63,6 +65,7 @@ t_tmp *_dolar_last(char *s, t_path *path, t_dolar *dol)
 {
     while (s[dol->i])
     {
+
         if (_condition_norm(s, dol->i) == 1)
             dol->res_tmp = case_00(dol, path, s);
         else if (s[dol->i] == '$' && s[dol->i + 1] != '\\')
@@ -78,7 +81,7 @@ t_tmp *_dolar_last(char *s, t_path *path, t_dolar *dol)
         }
         else if (((s[dol->i] != '$' && s[dol->i] != '\"') || (s[dol->i] == '$' && s[dol->i + 1] == '\\')) && s[dol->i])
         {
-            dol->res_tmp = _dolar_norm2(s, path, dol);
+            dol->res_tmp = _dolar_norm2(s, dol);
             --dol->i;
         }
         dol->o = 0;
@@ -94,6 +97,7 @@ char *dolar(char *str, t_path *path)
     t_dolar dol;
     t_tmp *tmp;
     char *s;
+    char *tmps;
     char *result;
 
     s = ft_strdup(str);
@@ -101,13 +105,19 @@ char *dolar(char *str, t_path *path)
     dol.head = _dolar_last(s, path, &dol);
     tmp = dol.head;
     result = NULL;
+    tmps = NULL;
     while (dol.head != NULL)
     {
+        if (result)
+            tmps = result;
         result = join_dolar(result, dol.head->s1);
+        if (tmps)
+            ft_stringdel(&tmps);
         dol.head = dol.head->next;
     }
     dol.head = tmp;
     free_dolar(&(dol.head));
+    // free_dolar(&dol.c1);
     ft_stringdel(&s);
     free_str_dol(&dol);
     return (result);

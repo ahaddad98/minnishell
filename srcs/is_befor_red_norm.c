@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_befor_red_norm.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sqatim <sqatim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 17:30:54 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 17:43:26 by sqatim           ###   ########.fr       */
+/*   Updated: 2021/03/07 12:13:22 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int condition_befor(char **cmd, t_use use)
 
 char *norm_befor1(char **cmd, t_use *use, char **tmp1, char *tmp)
 {
-    char *d;
     if (use->i == 0 && number_red(cmd[use->i]) == 0)
     {
         tmp = replace(tmp, cmd[use->i]);

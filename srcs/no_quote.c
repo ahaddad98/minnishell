@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   no_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:56:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 12:20:52 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:56:47 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char witch_quote(char *s)
+char witch_quote(char *s, int i)
 {
-    int i;
     int k;
 
-    i = 0;
     k = 0;
     while (s[i])
     {
@@ -33,7 +31,7 @@ char witch_quote(char *s)
                 return ('\'');
             else if (k % 2 == 0 && (s[i] == 34))
                 return ('\"');
-            else if (k % 2 != 0)
+            else /* if (k % 2 != 0) */
                 i++;
         }
         if (s[i] == 39)
@@ -80,21 +78,35 @@ char *noo_quote(char *s)
     int i;
     int j;
     char a;
-    char *c;
     char *result;
     char *res;
     char *str;
     i = 0;
     j = 0;
     a = '\0';
-    str = strdup(s);
-    a = witch_quote(str);
-    if (!(result = malloc(sizeof(char) * ft_strlen(str))))
+    str = ft_strdup(s);
+    if (!(result = malloc(sizeof(char) * (ft_strlen(str) + 1))))
         return (NULL);
     while (str[i])
     {
-        if (str[i] == a)
+        if (str[i] == '\'')
+        {
             i++;
+            if (str[i] != 39)
+            {
+                while (i < spl_quote(str, i))
+                    result[j++] = str[i++];
+            }
+        }
+        else if (str[i] == '\"')
+        {
+            i++;
+            if (str[i] != 34)
+            {
+                while (i < dbl_quote(str, i))
+                    result[j++] = str[i++];
+            }
+        }
         else
             result[j++] = str[i++];
     }
@@ -107,10 +119,8 @@ char *noo_quote(char *s)
 
 char *no_quote(char *s)
 {
-    if (witch_quote(s) != '\0')
+    if (witch_quote(s, 0) != '\0')
         return (noo_quote(s));
     else
         return (ft_strdup(s));
 }
-
-

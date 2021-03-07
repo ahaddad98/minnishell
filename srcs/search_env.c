@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   search_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:09:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/02/27 18:12:17 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 12:37:08 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*ft_str_to_equal(const char *s1, const char *s2, int len)
+char			*ft_str_to_equal(const char *s1, const char *s2, size_t len)
 {
 	size_t		i;
 	size_t		j;
@@ -37,7 +37,7 @@ char		*ft_str_to_equal(const char *s1, const char *s2, int len)
 	return (NULL);
 }
 
-int			cout_to_equal(char *str)
+int				cout_to_equal(char *str)
 {
 	int			i;
 
@@ -47,7 +47,7 @@ int			cout_to_equal(char *str)
 	return (i);
 }
 
-char		*search_env(char **env, char *str)
+char			*search_env(char **env, char *str)
 {
 	int			i;
 	int			j;

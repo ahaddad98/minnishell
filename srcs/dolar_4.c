@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:23:02 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 20:47:46 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/03/07 11:10:35 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char *_norm_case07(t_dolar *dol, char *s, char *tmp2, t_path *path)
         tmp2 = case_01(dol, s, dol->tmp1, path)->s1;
     else
         tmp2 = case_02(dol, s, dol->tmp1)->s1;
+
     return (tmp2);
 }
 
@@ -45,6 +46,7 @@ char *_norm_case007(t_dolar *dol, char *s, char *tmp2, char *tmp3)
             dol->tmp[dol->k++] = s[dol->i++];
         dol->tmp[dol->k] = '\0';
         tmp3 = join_dolar(tmp3, dol->tmp);
+        ft_stringdel(&dol->tmp);
     }
     return (tmp3);
 }
@@ -61,13 +63,16 @@ t_tmp *_norm_case_007(t_dolar *dol, char *s, char *tmp, t_path *path)
     while (dol->i < dol->p && s[dol->i])
     {
         if (_condition_norm(s, dol->i) == 1)
+        {
+            ft_stringdel(&tmp2);
             tmp2 = join_dolar(tmp, case_00(dol, path, s)->s1);
+        }
         else if (s[dol->i] == '$' && is_valid(s[dol->i + 1]))
         {
             tmpos = tmp3;
             tmp3 = join_dolar(tmp3, _norm_case07(dol, s, tmp2, path));
-            if(tmpos)
-                free(tmpos);
+            if (tmpos)
+                ft_stringdel(&tmpos);
             if (s[dol->i] != '\0')
                 --dol->i;
         }
@@ -75,14 +80,17 @@ t_tmp *_norm_case_007(t_dolar *dol, char *s, char *tmp, t_path *path)
         {
             tmpos = tmp3;
             tmp3 = _norm_case007(dol, s, tmp2, tmp3);
-            if(tmpos)
-                free(tmpos);
+            if (tmpos)
+                ft_stringdel(&tmpos);
             if (s[dol->i] != '\0')
                 --dol->i;
         }
         dol->i++;
-        dol->res_tmp = creat_tmp(tmp3);
     }
+    dol->res_tmp = creat_tmp(tmp3);
+    if (dol->c1)
+        free_dolar(&(dol->c1));
+    ft_stringdel(&tmp3);
     ft_stringdel(&tmp2);
     ft_stringdel(&tmp);
     return (dol->res_tmp);

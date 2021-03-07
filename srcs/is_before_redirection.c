@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_before_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 17:19:38 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 11:09:48 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:44:53 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,12 @@ char witch_red(char *s)
   return (0);
 }
 
-char *is_befor_redirection(char *line, t_shell *sh)
+char *is_befor_redirection(char *line)
 {
   char *tmp;
   char **cmd;
   char *res;
   char *s;
-  int k = 0;
 
   res = malloc(sizeof(char)* (ft_strlen(line)));
   cmd = shell_space_split(line);

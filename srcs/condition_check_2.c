@@ -6,13 +6,13 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:40:52 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 14:17:39 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/07 11:28:05 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		search_norm(char *str, int i, int k, int w)
+int			search_norm(char *str, int i, int k, int w)
 {
 	if (str[i] == '\\')
 	{
@@ -31,9 +31,9 @@ int		search_norm(char *str, int i, int k, int w)
 		else
 			i++;
 	}
-	if (str[i] == '\'' )
+	if (str[i] == '\'')
 		i = spl_quote(str, i + 1);
-	if (str[i] == '\"' )
+	if (str[i] == '\"')
 		i = dbl_quote(str, i + 1);
 	if (w == 1)
 		return (-1);
@@ -41,7 +41,7 @@ int		search_norm(char *str, int i, int k, int w)
 		return (i);
 }
 
-int		search(char *str)
+int			search(char *str)
 {
 	t_use use;
 
@@ -67,10 +67,11 @@ int		search(char *str)
 	}
 	return (0);
 }
-int check_redirection(char *line)
+
+int			check_redirection(char *line)
 {
-	int i;
-	int j;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;

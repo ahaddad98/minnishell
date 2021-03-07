@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 16:14:23 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:48:17 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_path
   char *path;
   char *cmds;
   char *pathcmd;
+  char *s;
   t_env *env;
   char *p;
   char *users;
@@ -52,6 +53,7 @@ typedef struct s_path
   pid_t pid;
   int file_desc;
   int i;
+  int i2;
   int index;
   int check;
   int ret;
@@ -187,10 +189,13 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
+int				is_slash(char *str);
+void		sort1(char **env, char **spl, int i, int index);
+void		show_env1(char **env);
 void			sigint_handler(int sig);
 void			get_signals(void);
 void		if_exit_red(t_all *all, t_path *path);
-void			ctrl_d(t_read *rd, t_path *path, int g_var);
+void			ctrl_d(t_read *rd, t_path *path);
 void			ft_free_ex(t_path *path);
 char			**ft_strdup_2d(char **str);
 void ft_fd(int fd[2], int fd1[2]);
@@ -218,9 +223,9 @@ void shift_extra(t_path *path, t_all *all, t_shell *sh);
 char *get_var_env(t_path *path, char *var);
 void cd_cmd(char *nextpath, t_path *path);
 int count_line(char **env);
-void export_cmd(char *name, char **env, t_shell *sh, t_path *path);
+void export_cmd(char *name, t_path *path);
 void unset_cmd(char *name, t_path *path);
-char *ft_str_to_equal(const char *s1, const char *s2, int len);
+char *ft_str_to_equal(const char *s1, const char *s2, size_t len);
 void pipes_cmd(t_path *path, t_list_cmd *lst, t_shell *sh);
 void pipes_cmd1(t_path *path, t_list_cmd *lst, t_shell *sh);
 void ft_echo(char *str, int option, t_path *path);
@@ -231,7 +236,7 @@ int ft_strcmp(const char *s1, const char *s2);
 int lstsize(t_list_cmd *lst);
 int lstsize_1(t_list_cmd *lst);
 void pipes_cmds(t_path *path, t_list_cmd *lst, int s);
-void ft_execute1(t_all *all, t_path *path, t_shell *sh);
+void ft_execute1(t_all *all, t_path *path);
 void free_1d(char *p);
 /*
 **
@@ -256,16 +261,16 @@ void ft_check_pipe(char *line, t_shell *sh);
 int pipe_e(char *line, t_shell *sh);
 int check_one(char *line);
 void print(t_pipe *pipe, t_shell *sh);
-void comand_details(t_list_cmd *lst, t_shell *sh, t_path *path);
+void comand_details(t_list_cmd *lst, t_shell *sh);
 int check_redirection(char *line);
-char *is_befor_redirection(char *line, t_shell *sh);
-char *is_after_redirection(char *line, t_shell *sh);
+char *is_befor_redirection(char *line);
+char *is_after_redirection(char *line);
 char *ft_str_join(char *s1, char *s2, char *s3);
 int search(char *str);
 void check_line_error(char *line, t_shell *sh);
 char *concat(char **tmp, int i);
-void part_one(t_list_cmd *lst, t_shell *sh, t_path *path);
-void part_two(t_list_cmd *lst, t_shell *sh, t_path *path);
+void part_one(t_list_cmd *lst);
+void part_two(t_list_cmd *lst);
 char *concat_space(char *tmp, char *tmp1);
 char *seperat_red(char *tmp);
 char *seperat_file_name(char *tmp);
@@ -276,7 +281,7 @@ char quote_char(char *s, t_shell *sh);
 char **ft_minishell_split(char const *s, char c);
 char **shell_space_split(char const *s);
 char *no_quote(char *str);
-void sh_initial(t_list_cmd *lst, t_shell *sh);
+void sh_initial(t_shell *sh);
 int we_have_quote(char *str, char c);
 // void promp_bash(t_cmd *cmd, t_path *path, int ret, char **line);
 int dbl_quote(const char *line, int i);
@@ -297,28 +302,26 @@ int index_1(char *line, int i);
 /*****************LIST***************************/
 t_tmp *creat_tmp(char *s1);
 void add_tmp(t_tmp **head, t_tmp *new_cmd);
-t_list_cmd *handle_line(t_read *rd, t_list_cmd *lst, t_path *path);
-t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red,
-                        t_path *path);
+t_list_cmd *handle_line(t_read *rd, t_list_cmd *lst);
+t_list_cmd *parsing_red(t_list_cmd *lst, char *string, char *red);
 t_all *all_conditions(t_all *all, char **free_sp, int *i);
 t_list_cmd *redirection_sort(t_list_cmd *lst, t_use *use, char *free_sp);
-t_list_cmd *pars_p_r(t_list_cmd *lst, char *string, char *red,
-                     t_path *path);
+t_list_cmd *pars_p_r(t_list_cmd *lst, char *string, char *red);
 t_list_cmd *pars_red(t_list_cmd *lst, char *red, t_use *use);
-t_list_cmd *pars_pipe(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_list_cmd *pars_pipe(t_list_cmd *lst);
 t_all *s_cmd_details(char *s1, char *s2, char *s3);
 t_list_cmd *define_each1(char *line);
 t_redirection *creat_node_r(char *content, char *content1);
 void add_red(t_redirection **head, t_redirection *new_cmd);
-t_list_cmd *spl_cmd(t_list_cmd *lst, t_shell *sh, t_path *path);
-t_list_cmd *sort_all_2(t_list_cmd *lst, t_all *all, char **free_sp, t_path *path);
+t_list_cmd *spl_cmd(t_list_cmd *lst);
+t_list_cmd *sort_all_2(t_list_cmd *lst, t_all *all, char **free_sp);
 t_list_cmd *link_list(t_list_cmd *lst, t_shell *sh);
 t_list_cmd *simple_cmd(t_list_cmd *lst, char **simple_cmd);
 t_all *s_cmd_details1(char *s1, char *s2);
 t_all *update_all(t_all *new_all,char *cmd, char *arg, t_redirection *red);
 void add_cmd(t_list_cmd **head, t_list_cmd *new_obj);
 t_list_cmd *creat_node(char *content);
-t_list_cmd *define_each(t_list_cmd *lst, t_shell *sh, t_path *path);
+t_list_cmd *define_each(t_list_cmd *lst);
 t_pipe *both(t_list_cmd *lst, t_shell *sh);
 t_list_cmd *pipe_define_each(t_list_cmd *lst, t_shell *sh, char **env);
 void add_pipe_list(t_pipe **head, t_pipe *new_cmd);
@@ -351,7 +354,7 @@ int ft_strlen_to_char(char *str);
 char witch_red(char *s);
 int dbl_quote_norm(const char *line, int i);
 int len_each(const char *s, int i);
-int each_char_norm(const char *s, int i, int u, int z);
+int each_char_norm(int i, int u, int z);
 int _condition_norm(char *s, int i);
 char *_no_slash_norm(char *str, t_use *use, char *tmp);
 char *_no_slash_norm1(char *str, t_use *use, char *tmp);

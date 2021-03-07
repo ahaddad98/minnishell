@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:10:45 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/05 14:39:06 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:26:22 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		init(t_path *path)
 	path->env = malloc(sizeof(t_env));
 }
 
-void		sh_initial(t_list_cmd *lst, t_shell *sh)
+void		sh_initial(t_shell *sh)
 {
 	t_dol dol;
 

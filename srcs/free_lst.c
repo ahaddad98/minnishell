@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 08:59:45 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/03/06 10:27:22 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:10:43 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void free_all_node(t_all **all)
 {
-    t_redirection *red;
-
     if ((*all)->command != NULL)
     {
         free((*all)->command);
@@ -116,8 +114,11 @@ void free_dolar(t_tmp **dol)
     while (*dol)
     {
         tmp = (*dol)->next;
+        if((*dol)->s1)
+        {
         free((*dol)->s1);
         (*dol)->s1 = NULL;
+        }
         free(*dol);
         *dol = tmp;
     }

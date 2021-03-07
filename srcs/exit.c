@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:17:22 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/04 17:44:43 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:55:56 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ long double			ft_atoi_loong(char *str)
 {
 	long double		ret;
 	int				sign;
-	int				counter;
 	int				i;
 
 	i = 0;
@@ -57,7 +56,6 @@ long long			ft_atoi_loong1(char *str)
 {
 	long long		ret;
 	int				sign;
-	int				counter;
 	int				i;
 
 	i = 0;

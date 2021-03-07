@@ -6,7 +6,7 @@
 #    By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/06 14:51:19 by ahaddad           #+#    #+#              #
-#    Updated: 2021/03/06 14:51:54 by ahaddad          ###   ########.fr        #
+#    Updated: 2021/03/07 12:16:58 by ahaddad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC_NAME=init.c\
 		export.c\
 		unset.c\
 		pipes.c\
-		lanch.c\
 		parsing.c\
 		pipe.c\
 		echo.c\
@@ -88,7 +87,7 @@ SRC= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 HDR= $(addprefix $(HDR_PATH)/,$(HDR_NAME))
 
 LIB= libft.a
-# FLAGS= -Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror
 LLIB_FLAG= -L$(LIB_PATH) libft/libft.a
 H_FLAG= -I $(HDR_PATH)
 

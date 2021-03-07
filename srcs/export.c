@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 10:58:45 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 14:11:31 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 12:16:39 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,14 @@ void				export_now(t_path *path, char *args)
 	path->env->fullenv = env__p;
 }
 
-void				export_cmd(char *n, char **env, t_shell *sh, t_path *path)
+void				export_cmd(char *n, t_path *path)
 {
 	char			**args;
 	int				i;
 	int				j;
 
+	j = -1;
+	i = -1;
 	if (!n)
 	{
 		sort_exp(path->env->fullenv, i, j);

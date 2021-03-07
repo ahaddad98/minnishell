@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:38:56 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/01 22:29:36 by amine            ###   ########.fr       */
+/*   Updated: 2021/03/07 11:40:37 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			check_equal(char *env)
 	int		i;
 
 	i = 0;
-	while (env[i] && i != ft_strlen(env))
+	while (env[i] && i != (int)ft_strlen(env))
 	{
 		if (env[i] == '=')
 			return (1);
@@ -95,23 +95,5 @@ void		sort1(char **env, char **spl, int i, int index)
 			write(1, "\"", 1);
 		c = '\n';
 		write(1, &c, 1);
-	}
-}
-
-void		show_env1(char **env)
-{
-	int		i;
-	int		index;
-	char	**spl;
-
-	if (!env)
-		return ;
-	i = 0;
-	while (env[i])
-	{
-		spl = ft_split(env[i], '=');
-		sort1(env, spl, i, index);
-		ft_free_2dem_arr((void ***)&spl);
-		i++;
 	}
 }

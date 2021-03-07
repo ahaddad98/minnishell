@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_antislash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 11:17:48 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 12:20:24 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:12:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int alloc_slach(char *s, int i)
     return (j);
 }
 
-char *slash_norm001(char *str, t_use *use, char *tmp)
+char *slash_norm001(char *str, t_use *use)
 {
     use->j = 0;
     use->u = spl_quote(str, use->i + 1) + 1;
@@ -99,7 +99,7 @@ char *slash_norm001(char *str, t_use *use, char *tmp)
     use->str1[use->j] = '\0';
     return (use->str1);
 }
-char *slach_norm02(char *str, t_use *use, char *tmp)
+char *slach_norm02(char *str, t_use *use)
 {
     use->i++;
     use->u = (use->w - 1) / 2;
@@ -114,7 +114,7 @@ char *slach_norm02(char *str, t_use *use, char *tmp)
     }
     return (use->s1);
 }
-char *slach_norm03(char *str, t_use *use, char *tmp)
+char *slach_norm03(char *str, t_use *use)
 {
     use->u = (use->w) / 2;
     if (!(use->s1 = malloc(sizeof(char) * (use->u + 1))))
@@ -125,7 +125,7 @@ char *slach_norm03(char *str, t_use *use, char *tmp)
     use->s1[use->k] = '\0';
     return (use->s1);
 }
-char *slach_norm04(char *str, t_use *use, char *tmp)
+char *slach_norm04(char *str, t_use *use)
 {
     use->j = 0;
     if (!(use->str1 = malloc(sizeof(char) * (alloc_slach(str, use->i) + 1))))
@@ -137,20 +137,26 @@ char *slach_norm04(char *str, t_use *use, char *tmp)
 }
 char *slach_norm002(char *str, t_use *use, char *tmp)
 {
+    char *tmp1;
+
     use->k = 0;
     use->w = count_slash(str, use->i);
     if (use->w % 2 != 0)
-        use->s1 = slach_norm02(str, use, tmp);
+        use->s1 = slach_norm02(str, use);
     else if (use->w % 2 == 0)
-        use->s1 = slach_norm03(str, use, tmp);
+        use->s1 = slach_norm03(str, use);
+    tmp1 = tmp;
     tmp = join_dolar(tmp, use->s1);
-    return(tmp);
+    ft_stringdel(&tmp1);
+    ft_stringdel(&use->s1);
+    return (tmp);
 }
 
 char *no_antislach(char *string)
 {
     char *str;
     char *tmp;
+    char *tmp1;
     t_use use;
 
     ft_bzero(&use, sizeof(t_use));
@@ -162,15 +168,18 @@ char *no_antislach(char *string)
         if (str[use.i] == '\"')
             tmp = _no_slash_norm(str, &use, tmp);
         if (str[use.i] == '\'')
-            tmp = slash_norm001(str, &use, tmp);
+            tmp = slash_norm001(str, &use);
         if (str[use.i] == '\\')
             tmp = slach_norm002(str, &use, tmp);
         else
         {
-            use.str1 = slach_norm04(str, &use, tmp);
+            use.str1 = slach_norm04(str, &use);
+            tmp1 = tmp;
             tmp = join_dolar(tmp, use.str1);
+            ft_stringdel(&tmp1);
         }
     }
     ft_stringdel(&str);
+    ft_stringdel(&use.str1);
     return (tmp);
 }
