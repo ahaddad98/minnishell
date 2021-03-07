@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:37:04 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 12:31:30 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 16:34:52 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void ft_builtin2(t_all *all, t_path *path)
 		ft_exit(all);
 	else if (ft_strcmp(all->command, "$?") == 0)
 	{
+		path->dol_sign = 127;
 		ft_putstr_fd("bash: ", 1);
 		ft_putnbr_fd(path->dol_sign, 1);
 		ft_putendl_fd(": Command not found", 1);
@@ -95,6 +96,7 @@ void ft_execute1(t_all *all, t_path *path, t_shell *sh)
 		ft_builtin1(all, path, sh);
 	else if (count_line(tmp) > 1 || !is_alpha(all->command))
 	{
+		path->dol_sign = 127;
 		ft_putstr_fd("bash: ", 1);
 		ft_putstr_fd(all->command, 1);
 		ft_putendl_fd(": Command not found", 1);

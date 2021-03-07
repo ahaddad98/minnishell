@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:08:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 12:36:19 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 16:21:49 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void			sigint_handler(int sig)
 	if (sig == SIGINT)
 	{
 		g_var_glob1 = 1;
+		g_var_glob2 = 1;
 		ft_putstr_fd("\b\b  \b\b\n\e[1;32mbash$ \e[0;37m", 1);
 	}
 	else if (sig == SIGQUIT)
 	{
 		if (g_var_glob1 == 3)
-			g_var_glob1 = 2;
+			g_var_glob2 = 2;
 		ft_putstr_fd("\b\b  \b\b", 1);
 	}
 }
@@ -35,18 +36,17 @@ void			ft_exe(t_shell *sh, t_path *path, t_list_cmd *lst, t_read *rd)
 {
 	if (sh->error != 1 && !path->dos)
 	{
-		if (g_var_glob1 == 1)
+		if (g_var_glob2 == 1)
 		{
 			path->dol_sign = 1;
-			ft_free_arr((void **)&rd->line);
-			g_var_glob1 = 0;
+			g_var_glob2 = 0;
 		}
-		if (g_var_glob1 == 2)
+		if (g_var_glob2 == 2)
 		{
 			path->dol_sign = 131;
-			g_var_glob1 = 0;
+			g_var_glob2 = 0;
 		}
-		if (g_var_glob1 == 0)
+		if (g_var_glob2 == 0)
 			g_var_glob1 = 3;
 		lst = handle_line(rd, lst, path);
 		// print_all(lst);
@@ -84,7 +84,7 @@ void			prompt(t_path *path, t_read *rd, t_shell *sh, t_list_cmd *lst)
 			sh_initial(lst, sh);
 			check_line_error(rd->line, sh);
 			ft_exe(sh, path, lst, rd);
-			if (g_var_glob1 == 2)
+			if (g_var_glob2 == 2)
 				ft_putstr_fd("Quit: 3\n", 1);
 		}
 		ft_free_arr((void **)&rd->line);
@@ -98,6 +98,7 @@ int				main(int argc, char **argv, char **env)
 	t_list_cmd			lst;
 	t_path				path;
 
+	g_var_glob1 = 0;
 	g_var_glob1 = 0;
 	(void)argc;
 	init(&path);

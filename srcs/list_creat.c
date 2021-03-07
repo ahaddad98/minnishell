@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 17:05:19 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/06 10:24:08 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:17:29 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_tmp *creat_tmp(char *s1)
   t_tmp *tmp;
 
   tmp = malloc(sizeof(t_tmp));
-  tmp->s1 = s1;
+  tmp->s1 = ft_strdup(s1);
   tmp->next = NULL;
   return (tmp);
 }

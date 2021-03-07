@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/06 09:49:29 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/06 16:14:23 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 #include <sys/wait.h>
 #include <limits.h>
 #define BUFFER_SIZE 2048
+
+int g_var_glob1;
+int g_var_glob2;
 
 typedef struct s_env
 {
