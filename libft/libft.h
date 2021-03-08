@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:15:30 by sqatim            #+#    #+#             */
-/*   Updated: 2021/02/24 16:14:58 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/08 10:39:35 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-int             ft_isalnum_1(int c);
-int             ft_true(int c);
-int             ft_var_valid(int c);
+int				ft_isalnum_1(int c);
+int				ft_true(int c);
+int				ft_var_valid(int c);
 
 #endif

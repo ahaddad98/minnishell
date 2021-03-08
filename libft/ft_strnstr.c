@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helkhatr < helkhatr@student.1337.ma>       +#+  +:+       +#+        */
+/*   By: ahaddad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/20 15:48:06 by sqatim            #+#    #+#             */
-/*   Updated: 2020/12/01 17:22:24 by helkhatr         ###   ########.fr       */
+/*   Created: 2021/03/08 10:34:10 by ahaddad           #+#    #+#             */
+/*   Updated: 2021/03/08 10:34:19 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	size_t i;
-	size_t j;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	j = 0;
