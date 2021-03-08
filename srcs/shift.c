@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 16:28:12 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/07 12:36:36 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/08 15:56:19 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,29 @@ int			che_red_type(t_path *path, t_all *all, int index)
 	return (index);
 }
 
-void		get_multi_red(char **redd, char **anti_red, t_path *path)
+void		get_multi_red(t_path *path, t_all *all)
 {
-	while (path->i < (count_line(redd) - 1))
+	t_redirection		*tmp1;
+	int					fds[2];
+
+	tmp1 = all->red;
+	while (all->red)
 	{
-		if ((path->file_desc = open(redd[path->i], O_WRONLY | O_CREAT |
-						O_TRUNC, 0777)) < 0)
-			ft_putendl_fd(strerror(errno), 2);
-		path->i++;
+		shift_now(all);
+		if (!ft_strcmp(all->red->sign, "<"))
+		{
+			if ((fds[0] = open(all->red->file_name, O_RDONLY)) < 0)
+			{
+				path->check_shift = 1;
+				ft_putendl_fd(strerror(errno), 2);
+				break ;
+			}
+			dup2(fds[0], 0);
+			close(fds[0]);
+		}
+		all->red = all->red->next;
 	}
-	path->i = 0;
-	while (path->i < (count_line(anti_red) - 1))
-	{
-		if ((path->file_desc = open(redd[path->i], O_RDONLY)) < 0)
-			ft_putendl_fd(strerror(errno), 2);
-		path->i++;
-	}
+	all->red = tmp1;
 }
 
 void		get_multi_red2(t_all *all, t_path *path)
@@ -93,28 +100,14 @@ void		get_multi_red2(t_all *all, t_path *path)
 
 void		shift_extra(t_path *path, t_all *all, t_shell *sh)
 {
-	char		**rd;
-	char		**at_rd;
-
+	(void)sh;
 	if_exit_red(all, path);
 	if ((path->pid = fork()) == 0)
 	{
-		if (sh->_red == 1)
-		{
-			rd = get_reder1(all);
-			at_rd = get_antired(all);
-			get_multi_red(rd, at_rd, path);
-			red_dif(at_rd[count_line(at_rd) - 1], rd[count_line(rd) - 1]);
+		path->check_shift = 0;
+		get_multi_red(path, all);
+		if (!path->check_shift)
 			ft_execute1(all, path);
-			ft_free_2dem_arr((void ***)&rd);
-			ft_free_2dem_arr((void ***)&at_rd);
-		}
-		else
-		{
-			get_multi_red2(all, path);
-			path->index = che_red_type(path, all, path->index);
-			check_dup(path, all, path->index);
-		}
 		exit(0);
 	}
 	wait(0);

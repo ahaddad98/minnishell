@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 10:58:45 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/07 12:16:39 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/08 15:34:37 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ void				export_cmd(char *n, t_path *path)
 	j = -1;
 	i = -1;
 	if (!n)
-	{
-		sort_exp(path->env->fullenv, i, j);
-		return ;
-	}
+		return ((void)sort_exp(path->env->fullenv, i, j));
 	args = shell_space_split(n);
 	i = 0;
 	while (args[i])

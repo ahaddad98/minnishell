@@ -6,7 +6,7 @@
 /*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 18:45:08 by ahaddad           #+#    #+#             */
-/*   Updated: 2021/03/07 11:48:17 by ahaddad          ###   ########.fr       */
+/*   Updated: 2021/03/08 15:52:43 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_path
   int check;
   int ret;
   int dos;
+  int check_shift;
 } t_path;
 
 typedef struct s_token
@@ -189,6 +190,7 @@ typedef struct s_dolar
 *************execute*****************
 **
 */
+void		shift_now(t_all *all);
 int				is_slash(char *str);
 void		sort1(char **env, char **spl, int i, int index);
 void		show_env1(char **env);
@@ -202,15 +204,11 @@ void ft_fd(int fd[2], int fd1[2]);
 void ft_error_free(void);
 void check_fd(int fd[2], int fd1[2], int i, t_path *path);
 int lstsize_2(t_redirection *red);
-void red_dif(char *f1, char *f2);
-int ch_red_dif(t_list_cmd *lst, t_shell *sh);
-char **get_reder1(t_all *all);
-char **get_antired(t_all *all);
 int is_modif(char *args, int ch_mod, t_path *path);
 char *get_bef_eq(char *args);
 int checkis_valid_var(char *args);
 void ft_exit();
-int ch_red_dif(t_list_cmd *lst, t_shell *sh);
+int			ch_red_dif(t_list_cmd *lst, t_shell *sh);
 void init(t_path *path);
 void show_env(char **path);
 char *search_env(char **env, char *str);
