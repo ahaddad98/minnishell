@@ -3,36 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahaddad <ahaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:30:13 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/03/07 11:06:17 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/03/08 12:03:07 by ahaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void		call_getprg(t_list_cmd *lst, t_path *path, t_shell *sh)
+void		call_getprg_1(t_list_cmd *lst, t_path *path, t_shell *sh)
 {
 	t_list_cmd		*tmp;
 	t_all			*tmp1;
 
 	tmp = lst;
+	tmp1 = lst->all;
+	ch_red_dif(lst, sh);
+	while (lst->all != NULL)
+	{
+		if (search(lst->cmd) && lst->all->red->file_name)
+			shift_extra(path, lst->all, sh);
+		else if (search(lst->cmd) && !lst->all->red->file_name)
+			shift_extra(path, lst->all, sh);
+		else
+		{
+			ft_execute1(lst->all, path);
+		}
+		lst->all = lst->all->next;
+	}
+	lst->all = tmp1;
+}
+
+void		call_getprg(t_list_cmd *lst, t_path *path, t_shell *sh)
+{
+	t_list_cmd		*tmp;
+
+	tmp = lst;
 	while (lst != NULL)
 	{
-		tmp1 = lst->all;
-		ch_red_dif(lst, sh);
-		while (lst->all != NULL)
-		{
-			if (search(lst->cmd) && lst->all->red->file_name)
-				shift_extra(path, lst->all, sh);
-			else if (search(lst->cmd) && !lst->all->red->file_name)
-				shift_extra(path, lst->all, sh);
-			else
-				ft_execute1(lst->all, path);
-			lst->all = lst->all->next;
-		}
-		lst->all = tmp1;
+		call_getprg_1(lst, path, sh);
 		lst = lst->next;
 	}
 	lst = tmp;
@@ -48,7 +58,7 @@ void		call_pipe(t_list_cmd *lst, t_path *path, t_shell *sh)
 		if (pipe_e(lst->cmd, sh) == 1)
 			pipes_cmd(path, lst, sh);
 		else
-			call_getprg(lst, path, sh);
+			call_getprg_1(lst, path, sh);
 		lst = lst->next;
 	}
 	lst = list1;
